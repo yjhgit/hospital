@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>中医馆主页</title>
+    <link rel="shortcut icon" href="/docByq/img/logo/favicon.png">
+    <!-- FONT_AWESOME -->
+    <link rel="stylesheet" href="/docByq/css/all.min.css">
+    <link rel="stylesheet" href="/docByq/css/fontawesome.min.css">
+    <!-- THEMIFY ICON -->
+    <link rel="stylesheet" href="/docByq/css/themify-icons.css">
+    <!-- X-ICON -->
+    <link rel="stylesheet" href="/docByq/css/xicon.css">
+    <!-- OWL CAROUSEL -->
+    <link rel="stylesheet" href="/docByq/css/owl.carousel.min.css">
+    <!-- NICE SELECT -->
+    <link rel="stylesheet" href="/docByq/css/nice-select.css">
+    <!-- CORE NAVIGATION -->
+    <link rel="stylesheet" href="/docByq/css/coreNavigation-1.1.3.min.css">
+    <!-- FANCY-BOX -->
+    <link rel="stylesheet" href="/docByq/css/jquery.fancybox.min.css">
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="/docByq/css/bootstrap.min.css">
+    <!-- PERSONAL STYLE -->
+    <link rel="stylesheet" href="/docByq/scss/style.css">
+    <link rel="stylesheet" href="/docByq/css/responsive.css">
+    <link rel="stylesheet" href="/docByq/css/style.css">
+    <link rel="stylesheet" href="/docByq/css/iconfont.css"/>
+    <script src="/js/HttpUtil.js"></script>
+
+    <link rel="stylesheet" href="/doc/lib/layui-v2.6.3/css/layui.css">
+
+</head>
+
+<body>
+
+<!-- 预紧器 -->
+
+<div id="preloader">
+    <div id="status">
+        <img src="/docByq/img/logo/favicon.png" alt="perloader">
+    </div>
+</div>
+
+<!-- 头顶开始 -->
+
+<div class="header-top-bar d-md-block d-none">
+    <div class="container">
+        <div class="head-content d-md-flex d-block align-items-center">
+            <div class="logo d-none d-lg-block">
+                <a href="/"><img src="/docByq/img/logo/logo.png" alt=""></a>
+            </div>
+            <div class="ml-auto content" style="color: aliceblue;">
+                <i class="ti-time"></i>
+                工作日： 08:00-19:00 <br>
+                星期六 和 星期天 - 休息
+            </div>
+            <div class=" content">
+                <i class="ti-mobile"></i>
+                <div class="">
+                    <a style="color: aliceblue;" href="#">(+86) 0777-8569442</a>
+                    <br>
+                    <a style="color: aliceblue;" href="#"></a>
+                </div>
+            </div>
+            <div class="content" style="color: aliceblue;">
+                <i class="ti-location-pin"></i>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Header Start -->
+
+<header class="header">
+    <nav class="">
+        <!-- Mobile -->
+        <div class="nav-header right">
+            <a href="./home.html" class="brand d-lg-none d-block">
+                <img src="/docByq/img/logo/logo.png" alt="">
+            </a>
+            <button class="toggle-bar"><span class="fa fa-bars"></span></button>
+        </div>
+        <div class="header-btn">
+            <a href="/login/user" class="btn btn-secondary" id="demo1">
+                <i class="fas fa-lock"></i><span id="username">登录</span>
+            </a>
+
+        </div>
+        <ul class="menu">
+            <li class="active"><a href="/">网站首页</a></li>
+            <li class="dropdown">
+                <a href="#">重点专科</a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown">
+                        <a href="#">专家团队</a>
+                        <ul class="dropdown-menu left-auto">
+                            <li><a href="/reception/Department">科室分类</a></li>
+                            <li><a href="/reception/expert">专家名录</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">中药专区</a>
+                        <ul class="dropdown-menu left-auto">
+                            <li><a href="/reception/toDrugs">道地药材</a></li>
+                            <li onclick="reyc()"><a >煎药预约</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">看诊服务</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/reception/chat">线上问诊</a></li>
+                    <li><a href="/departments/findAll">预约面诊</a></li>
+                </ul>
+            </li>
+            <li class="yyc"><a href="/reception/toForum">中医健康科普</a></li>
+            <li><a href="/reception/about">关于我们</a></li>
+
+        </ul>
+
+    </nav>
+</header>
+<!-- Header End -->
+
+<!-- BANNER START -->
+
+<div class="banner">
+    <div class="slider-carousel owl-carousel">
+        <div class="single-slide" style="background-image: url(/docByq/img/banner/5.jpg)">
+            <div class="container">
+                <div class="slide-caption">
+                    <h1>药材<br> 有什么功效？</h1>
+                    <p>
+                        中药有汤剂、丸剂、膏剂、散剂等多种剂型，
+                        针对一些慢性疾病有良好的效果，特别是对一些慢性虚损类的疾病和体虚的患者。
+                        但是中药的味道较苦，不容易下咽。方药需要煎煮，服用比较麻烦。中药的药效复杂，
+                        缺少西药的明确的循证依据，多用于慢性疾病进行调理，有时起效较慢。
+                    </p>
+                    <div class="banner-btn ">
+                        <a href="/reception/toDrugs" class="btn btn-secondary-filled">学习 ——></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="single-slide" style="background-image: url(/docByq/img/banner/4.jpg)">
+            <div class="container">
+                <div class="slide-caption text-sm-right text-left">
+                    <h1>药膳<br> 独一无二的魅力 </h1>
+                    <p>
+                        不论是五谷杂粮，或豆类、小杂粮、水果及其干果类、各类蔬菜类，
+                        都可用作食疗和药膳的选料。
+                        此外在动物类的禽兽、家畜或水产海味皆在选料的范围。
+
+                    </p>
+                    <div class="banner-btn">
+                        <a href="/reception/toDrugs" class="btn btn-secondary-filled">学习 ——></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="single-slide" style="background-image: url(/docByq/img/banner/6.jpg)">
+            <div class="container">
+                <div class="slide-caption">
+                    <h1>补药<br> 是不是吃越多越好 </h1>
+                    <p>
+                        “灵芝、藏红花、虫草、人参是大家熟知的名贵中药材,但中药不是越贵越好,
+                        也不是越好越补。 “一味用名贵药物进补,可能会让有淤血、息肉、包块等实
+                        证肿瘤患者病情加重,闭门留寇,越补越坏事。
+
+                    </p>
+                    <div class="banner-btn">
+                        <a href="/reception/toDrugs" class="btn btn-secondary-filled">学习 ——></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slider section end -->
+
+<section class="about-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title text-center mb-2">
+                    <h2>动态新闻：信息中的我们</h2>
+                    <p>
+                        网站实时的资讯，为您快速分享
+                    </p>
+                    <div class="section-border">
+                        <div class="icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="item-block-06">
+                    <div class="item-content d-flex text-left">
+                        <div class="icon ">
+                            <span class="iconfont icon-shuzi- color-icon"></span>
+                        </div>
+                        <div class=" ">
+                            <h6><a href="#">国家中管局“姚氏妇科”传人学术汇报会暨新书授书仪式成功举办</a></h6>
+                            <p>
+                                5月21日，国家中医药管理局第一批全国中医学术流派传承工作室...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-block-06">
+                    <div class="item-content d-flex text-left">
+                        <div class="icon">
+                            <span class="iconfont icon-shuzi-1 color-icon"></span>
+                        </div>
+                        <div class="">
+                            <h6><a href="#">杏林中医馆获南宁市精神文明建设指导委员会等部门联合颁发“爱心企业”荣誉</a></h6>
+                            <p>
+                                6月5日，在南宁市精神文明建设指导委员会主办，南宁市新时代...
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-block-06">
+                    <div class="item-content d-flex text-left">
+                        <div class="icon">
+                            <span class="iconfont icon-shuzi-5 color-icon"></span>
+                        </div>
+                        <div class="">
+                            <h6><a href="#">冬令进补暖冬相伴(2017圣爱胶膏品鉴会圆满落幕)</a></h6>
+                            <p>
+                                由杏林中医馆主办的圣爱胶膏品鉴会在南宁杏林中医馆（—品天下馆...
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="item-block-06">
+                    <div class="item-content d-flex text-left">
+                        <div class="icon">
+                            <span class="iconfont icon-shuzi-3 color-icon"></span>
+                        </div>
+                        <div class="">
+                            <h6><a href="#">攻克疑难，造福民生，广西首个中医疑难病诊治中心在杏林成立</a></h6>
+                            <p>
+                                疑难病一般是指在诊疗中病因复杂未明、诊断难以统—...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-block-06">
+                    <div class="item-content d-flex text-left">
+                        <div class="icon">
+                            <span class="iconfont icon-shuzi-2 color-icon"></span>
+                        </div>
+                        <div class="">
+                            <h6><a href="#">韦老师受南宁广播电视台邀请做“夏季养生专题讲座”</a></h6>
+                            <p>
+                                受南宁广播电视台资讯广播的邀请:南宁杏林中医馆坐诊专家韦老师...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-block-06">
+                    <div class="item-content d-flex text-left">
+                        <div class="icon">
+                            <span class="iconfont icon-shuzi-4 color-icon"></span>
+                        </div>
+                        <div class="">
+                            <h6><a href="#">杏林中医馆被评选为“公益事业积极单位”</a></h6>
+                            <p>
+                                受南国早报邀请参加爱心医院颁奖典礼，获得了“公益事业积极单位”...
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="section-btn" style="margin: 50px auto; width: 100px">
+        <a href="http://www.ynxlt120.com/a/ygxw/" class="apointment-btn btn btn-secondary">更多新闻<i
+                class="ti-angle-double-down"></i></a>
+    </div>
+</section>
+
+<!-- SCHEDULE SECTION START -->
+
+<section class="schedule-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title text-center mb-3">
+                    <h2>特色 <span>专科</span></h2>
+                    <p>
+                        我们的特色内容
+                    </p>
+                    <div class="section-border">
+                        <div class="icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="background-color: white; height: 350px;width: 100%; ">
+                <div class="col-4" style="float: left;margin-top: 70px;margin-left: 35px;">
+                    <img src="/docByq/img/sehedule/1-2.jpg" width="200px" height="250px" id="myimg"/>
+                </div>
+                <div class="col-7" style="float: left;margin-left: 60px;margin-top: 40px;">
+                    <div>
+                        <button class="mybutton" onclick="but(this)" id="a">荨麻疹</button>
+                        <button class="mybutton" onclick="but(this)">皮炎</button>
+                        <button class="mybutton" onclick="but(this)">中医内科</button>
+                        <button class="mybutton" onclick="but(this)">中医理疗</button>
+                        <button class="mybutton" onclick="but(this)">道地药材</button>
+                    </div>
+                    <hr/>
+                    <div>
+                        <h5 id="title">荨麻疹</h5>
+                        <p id="pp" style="font-size: 14px;word-break: break-all;word-wrap: break-word;">
+                            　  麻疹是儿童最常见的急性呼吸道传染病之一，其传染性很强，在人口密集而未普种疫苗的地区易发生流行约2～3年发生一次大流行。临床上以发热、上呼吸道炎症、
+                            眼结膜炎等而以皮肤出现红色斑丘疹和颊粘膜上有麻疹粘膜斑及疹退后遗留色素沉着伴糠麸样脱屑为特征。我国自1965年，开始普种麻疹减毒活疫苗后已控制了大流行。
+                        </p>
+                        <a class="mya" href="/reception/Department">查看详情>>>>>></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- APPOINTMENT START -->
+
+<section class=" appointment-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title text-center mb-3">
+                    <h2>医馆概况：走进<span>杏林堂</span>中医馆 </h2>
+                    <p>
+                        医馆概况
+                    </p>
+                    <div class="section-border">
+                        <div class="icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="background-color: #dfdfdf; height: 350px;width: 100%; ">
+                <div class="col-7" style="float: left;margin-left: 60px;margin-top: 40px;">
+                    <div>
+                        <h5>医馆概况</h5>
+                        <p style="font-size: 14px;word-break: break-all;word-wrap: break-word;">
+                            　　杏林堂是一家尊重自然的古典主义中医馆，二十多年专治急、慢性荨麻疹，胆碱性荨麻疹以及皮炎等各种皮肤疑难杂症中医治疗为特色，诊疗经验丰富，深受患者好评。
+                            杏林堂以“弘扬中国传统文化，振兴中医药事业”为使命，始终坚持延续百年的济世理念—“以德行医，仁医良药”，坚持四不采购原则(炮制火候不到的中药不采购、
+                            过度硫磺熏制的中药不采购、生长年份不到的中药不采购、伪劣假冒中药不采购)，确保做到“药材地道以效验为上，利求平和唯公允是本”。
+                        </p>
+                        <a class="mya" href="/reception/about">查看详情>>>>>></a>
+                    </div>
+                </div>
+                <div class="col-4" style="float: left;margin-top: 70px;margin-left: 35px;">
+                    <img src="/docByq/img/sehedule/abo.jpg" width="200px" height="250px"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- APPOINTMENT END -->
+<section class="gallery-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title text-center mb-3">
+                    <h2>我们的 <span>医生</span></h2>
+                    <p>
+                        专业团队值得放心
+                    </p>
+                    <div class="section-border">
+                        <div class="icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="item-block-02">
+                    <a data-fancybox="gallery" href="/docByq/img/zj/1.jpg">
+                        <img src="/docByq/img/zj/1.jpg" alt="1">
+                        <div class="overlay">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <input hidden id="id">
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="item-block-02">
+                    <a data-fancybox="gallery" href="/docByq/img/zj/2.jpg">
+                        <img src="/docByq/img/zj/2.jpg" alt="2">
+                        <div class="overlay">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="item-block-02">
+                    <a data-fancybox="gallery" href="/docByq/img/zj/3.jpg">
+                        <img src="/docByq/img/zj/3.jpg" alt="3">
+                        <div class="overlay">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="item-block-02">
+                    <a data-fancybox="gallery" href="/docByq/img/zj/4.jpg">
+                        <img src="/docByq/img/zj/4.jpg" alt="4">
+                        <div class="overlay">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="item-block-02">
+                    <a data-fancybox="gallery" href="/docByq/img/zj/5.jpg">
+                        <img src="/docByq/img/zj/5.jpg" alt="5">
+                        <div class="overlay">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="item-block-02">
+                    <a data-fancybox="gallery" href="/docByq/img/zj/6.jpg">
+                        <img src="/docByq/img/zj/6.jpg" alt="6">
+                        <div class="overlay">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="item-block-02">
+                    <a data-fancybox="gallery" href="/docByq/img/zj/7.jpg">
+                        <img src="/docByq/img/zj/7.jpg" alt="7">
+                        <div class="overlay">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="item-block-02">
+                    <a data-fancybox="gallery" href="/docByq/img/zj/8.jpg">
+                        <img src="/docByq/img/zj/8.jpg" alt="8">
+                        <div class="overlay">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICE START -->
+
+<!-- CONTACT SECTION END -->
+
+<!-- FOOTER START -->
+
+<footer class="footer-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="footer-content d-md-flex justify-content-between align-items-center text-center">
+                    <p>Copyright © 2023 <a href="#">nnnu.com</a> 最终解释权属于yyc
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- FOOTER END -->
+
+
+<script src="/docByq/js/jquery-3.3.1.min.js"></script>
+<script src="/docByq/js/bootstrap.min.js"></script>
+<script src="/docByq/js/owl.carousel.min.js"></script>
+<script src="/docByq/js/jquery.fancybox.min.js"></script>
+<script src="/docByq/js/jquery.nice-select.js"></script>
+<script src="/docByq/js/jquery.countup.js"></script>
+<script src="/docByq/js/jquery.waypoints.js"></script>
+<script src="/docByq/js/coreNavigation-1.1.3.min.js"></script>
+<script src="/docByq/js/popper.min.js"></script>
+<script src="/docByq/js/script.js"></script>
+<script src="/doc/lib/layui-v2.6.3/layui.js"></script>
+<script type="text/javascript" src="/js/xadmin.js"></script>
+<script>
+    $("#a").css("color", "#ffffff");
+    $("#a").css("background-color", "#b9282e");
+    $("#a").css("border", "none");
+
+    function but(enve) {
+        $(enve).css("color", "#ffffff");
+        $(enve).css("background-color", "#b9282e");
+        $(enve).css("border", "none");
+        $(enve).siblings().css("color", "#000000");
+        $(enve).siblings().css("background-color", "#cac5be");
+        $(enve).siblings().css("border", "none");
+        $("#title").text($(enve).text());
+        if ("荨麻疹" == $(enve).text()) {
+            $("#myimg").attr("src", "/docByq/img/sehedule/2.png");
+        } else if ("皮炎" == $(enve).text()) {
+            $("#myimg").attr("src", "/docByq/img/sehedule/4.png");
+            $("#pp").text("  稻田性皮炎常发生在水田劳动中的农民，以春夏农忙季节多发。其分为浸渍糜烂型皮炎与尾蚴皮炎，前者多因在水田尤其是碱性水田中浸泡时间过长，使皮肤变软起皱，加之在插秧中不断地遭受机械性摩擦，表皮擦破而发生糜烂，" +
+                "水田的温度越高，越会诱发皮炎的发生。而尾蚴皮炎则是由禽畜类血吸虫尾蚴钻入皮肤而引起的局部炎症。")
+        } else if ("中医内科" == $(enve).text()) {
+            $("#myimg").attr("src", "/docByq/img/sehedule/3.png");
+            $("#pp").text("  中医外治法用火疗治疗膝关节骨性关节炎安全无痛、疗效稳定。火疗是传统中医火灸疗法的简称。膝关节骨性关节炎是由于机械性外伤、劳损、炎症或先天性因素所造成的膝关节软骨破坏，使软骨变薄、粗糙易脱落或增生硬化而产生骨赘，软骨滑脱、渗出液体，形成大量积液，使关节内力学平衡失调，出现临床不适症状。骨性膝关节炎的临床表现：发病缓慢 多见于中老年肥胖女性，往往有劳累史。" +
+                "关节疼痛 活动时膝关节疼痛加重，其特点是初起疼痛为阵发性，后为持续性，劳累及夜间更甚，上下楼梯疼痛明显。")
+        } else if ("中医理疗" == $(enve).text()) {
+            $("#myimg").attr("src", "/docByq/img/sehedule/6.png");
+            $("#pp").text("  拔罐能拔出体内的寒气、湿气，那么经常拔罐会不会把“元气”也拔出来呢？拔火罐”是中国民问流传很久的一种治病方法。落枕、脖子疼、消化不良……拔拔罐都能起到一定的缓解作用。" +
+                "它是利用燃烧、抽吸、挤压等方法排除罐中空气，使罐中形成负压，从而将罐吸着于人体经络穴位或患病部位以治疗疾病的方法。拔罐时用的“罐”有许多种，常见的是玻璃罐、陶瓷罐、竹罐、橡胶罐、塑料抽气罐等。")
+        }
+        if ("道地药材" == $(enve).text()) {
+            $("#myimg").attr("src", "/docByq/img/sehedule/5.png");
+            $("#pp").text("  党参非人参，是指“真党参”，系指产于山西上党（今山西长治）的五加科人参。现在的党参多用桔梗科长藤子的桔梗，名蔓桔梗。很多药用植物都有直立和藤本两个品种，" +
+                "例如，直立桔梗（桔梗）与蔓桔梗（党参）；直立龙胆（龙胆草）与蔓龙胆（秦艽）；直立百部（百部）与蔓百部（草百部）等。从以上三例可以看出，只有百部是一种药，其他都分为两种药。一般同科属的近缘生药，其性味、功效大体相同。比如刺五加与五加科的人参功效相似，而蔓桔梗（党参）与桔梗的功效也相似。")
+        }
+    }
+
+    userInfo(function (res) {
+        console.log("失败")
+        console.log(res)
+        if (res.code == 500) {
+
+        } else {
+            $("#username").text(res.data.userInfo.username);
+            $("#id").val(res.data.id);
+            $("#dome1").append("<i class=\"layui-icon layui-icon-down layui-font-12\"></i>");
+            layui.use('dropdown', function () {
+                var dropdown = layui.dropdown
+                dropdown.render({
+                    elem: '#demo1' //可绑定在任意元素中，此处以上述按钮为例
+                    , data: [{
+                        title: '修改密码'
+                        , id: 100
+                        //,href: '#'
+                    }, {
+                        title: '个人信息'
+                        , id: 101
+                        //,href: 'https://www.layui.com/' //开启超链接
+                        //,target: '_blank' //新窗口方式打开
+                    }, {
+                        title: '我的收藏'
+                        , id: 101
+                        , href: '/reception/toForumByMy?id=' + res.data.id //开启超链接
+                        //,target: '_blank' //新窗口方式打开
+                    }, {
+                        title: '我的留言'
+                        , id: 101
+                        , href: '/reception/toMyProposal?id=' + res.data.id //开启超链接
+                        //,target: '_blank' //新窗口方式打开
+                    }, {
+                        title: '我的预约'
+                        , id: 101
+                        ,href: '/reception//toMyReserve?id='+res.data.id //开启超链接
+                        //,target: '_blank' //新窗口方式打开
+                    }
+                    ]
+                    , id: 'demo1'
+                    //菜单被点击的事件
+                    , click: function (obj) {
+                        console.log(obj);
+                        if (obj.title == '修改密码') {
+                            xadmin.open('修改密码', '/reception/toPassword', '580', '600', false);
+                            // layer.msg('修改密码');
+                        }
+                        if (obj.title == '个人信息') {
+                            xadmin.open('个人信息', '/reception/toUserInfo', '580', '600', false);
+                            // layer.msg('个人信息');
+                        }
+
+
+                    }
+                });
+            });
+        }
+
+    })
+
+    function reyc() {
+        var id = $("#id").val();
+        if (id==''||id==null){
+            window.location.href='/login/user';
+        }
+        xadmin.open('预约煎药', '/reception/toreYc', '580', '600', false);
+    }
+
+    function reys() {
+        var id = $("#id").val();
+        if (id==''||id==null){
+            window.location.href='/login/user';
+        }
+        xadmin.open('预约面诊', '/reception/toreYs', '580', '600', false);
+    }
+</script>
+
+</body>
+
+</html>

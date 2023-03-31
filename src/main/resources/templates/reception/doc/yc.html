@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>杏林堂中医馆</title>
+		<link rel="shortcut icon" href="/docByq/img/logo/favicon.png">
+
+		<!-- FONT_AWESOME -->
+		<link rel="stylesheet" href="/docByq/css/all.min.css">
+		<link rel="stylesheet" href="/docByq/css/fontawesome.min.css">
+
+		<!-- THEMIFY ICON -->
+		<link rel="stylesheet" href="/docByq/css/themify-icons.css">
+
+		<!-- X-ICON -->
+		<link rel="stylesheet" href="/docByq/css/xicon.css">
+
+		<!-- OWL CAROUSEL -->
+		<link rel="stylesheet" href="/docByq/css/owl.carousel.min.css">
+
+		<!-- CORE NAVIGATION -->
+		<link rel="stylesheet" href="/docByq/css/coreNavigation-1.1.3.min.css">
+
+		<!-- NICE SELECT -->
+		<link rel="stylesheet" href="/docByq/css/nice-select.css">
+
+
+		<!-- FANCY-BOX -->
+		<link rel="stylesheet" href="/docByq/css/jquery.fancybox.min.css">
+
+		<!-- BOOTSTRAP -->
+		<link rel="stylesheet" href="/docByq/css/bootstrap.min.css">
+
+		<!-- PERSONAL STYLE -->
+		<link rel="stylesheet" href="/docByq/scss/style.css">
+		<link rel="stylesheet" href="/docByq/css/responsive.css">
+		<link rel="stylesheet" href="/doc/lib/layui-v2.6.3/css/layui.css">
+		<script src="/doc/lib/layui-v2.6.3/layui.js"></script>
+		<script type="text/javascript" src="/js/xadmin.js"></script>
+		<script src="/js/HttpUtil.js"></script>
+	</head>
+
+	<body>
+
+		<!-- Preloader -->
+
+		<div id="preloader">
+			<div id="status">
+				<img src="/docByq/img/logo/favicon.png" alt="perloader">
+			</div>
+		</div>
+
+		<!-- Header Top Bar Start -->
+
+		<div class="header-top-bar d-md-block d-none">
+			<div class="container">
+				<div class="head-content d-md-flex d-block align-items-center">
+					<div class="logo d-none d-lg-block">
+						<a href="./home.html"><img src="/docByq/img/logo/logo.png" alt=""></a>
+					</div>
+					<div class="ml-auto content" style="color: aliceblue;">
+						<i class="ti-time"></i>
+						工作日： 08:00-19:00 <br>
+						星期六 和 星期天 - 休息
+					</div>
+					<div class=" content">
+						<i class="ti-mobile"></i>
+						<div class="">
+							<a style="color: aliceblue;" href="#">(+86) 0777-8569442</a>
+							<br>
+							<a style="color: aliceblue;" href="#"></a>
+						</div>
+					</div>
+					<div class="content" style="color: aliceblue;">
+						<i class="ti-location-pin"></i>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Header Start -->
+
+		<header class="header">
+			<nav class="">
+				<!-- Mobile -->
+				<div class="nav-header right">
+					<a href="/" class="brand d-lg-none d-block">
+						<img src="/docByq/img/logo/logo.png" alt="">
+					</a>
+					<button class="toggle-bar"><span class="fa fa-bars"></span></button>
+				</div>
+				<div class="header-btn">
+					<a href="/login/user" class="btn btn-secondary" id="demo1">
+						<i class="fas fa-lock"></i><span id="username">登录</span>
+					</a>
+
+				</div>
+				<ul class="menu">
+					<li ><a href="/">网站首页</a></li>
+					<li class="dropdown active">
+						<a href="#">重点专科</a>
+						<ul class="dropdown-menu">
+							<li class="dropdown">
+								<a href="#">专家团队</a>
+								<ul class="dropdown-menu left-auto">
+									<li><a href="/reception/Department">科室分类</a></li>
+									<li><a href="/reception/expert">专家名录</a></li>
+								</ul>
+							</li>
+							<li class="dropdown active">
+								<a href="#">中药专区</a>
+								<ul class="dropdown-menu left-auto">
+									<li class="active"><a href="/reception/toDrugs">道地药材</a></li>
+									<li onclick="reyc()"><a >煎药预约</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="#">看诊服务</a>
+						<ul class="dropdown-menu">
+							<li><a href="/reception/chat">线上问诊</a></li>
+							<li onclick="reys()"><a >预约面诊</a></li>
+						</ul>
+					</li>
+					<li><a href="/reception/toForum">中医健康科普</a></li>
+					<li><a href="/reception/about">关于我们</a></li>
+
+				</ul>
+
+			</nav>
+		</header>
+		<!-- Header End -->
+
+
+		<!-- Shop PAGE BANNER -->
+
+		<div class="page-banner">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="page-banner-content">
+							<div class="d-sm-flex justify-content-between align-items-center">
+								<div class="title">
+									<h6 class="text-left text-capitalized">道地药材</h6>
+									<h2>药材展示</h2>
+								</div>
+								<div class="link text-sm-right text-left">
+									<a href="/">主页 <i class="ti-angle-double-right"></i></a>
+									道地药材
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Shop PAGE BANNER  END-->
+
+		<!-- Product Area -->
+
+		<section class="product-section product-section-02">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="section-title text-center">
+							<h2>道地 <span>药材</span> </h2>
+							<p>
+								好药材值得放心
+							</p>
+							<div class="section-border">
+								<div class="icon">
+									<i class="fas fa-tint"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" >
+					<div class="col-lg-3 col-sm-6" th:each="i : ${list}">
+						<div class="product-card">
+							<div class="product-img">
+								<img th:src="${i.drugsImg}" alt="Images">
+								<div class="product-add">
+									<a th:href="${i.href}"><i class="ti-eye"></i></a>
+								</div>
+
+							</div>
+							<div class="content">
+								<h5 class="d-flex align-item-center justify-content-between"><a th:href="${i.href}" th:text="${i.name}"></a>
+									<!--
+									<span>很好</span>
+									<div class="price text-right">
+										<del>很贵</del>
+									</div>
+									!-->
+								</h5>
+								<div class="align-item-center justify-content-between">
+									<span>简介：</span>
+									<br/>
+									<p style="text-indent : 20px;" th:text="${i.synopsis}"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			</div>
+		</section>
+		<!-- Product Area End -->
+
+
+
+
+
+		<!-- FOOTER START -->
+
+		<footer class="footer-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="footer-content d-md-flex justify-content-between align-items-center text-center">
+							<p>Copyright © 2023 <a href="#">nnnu.com</a> 最终解释权属于yyc
+							</p>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<!-- FOOTER END -->
+
+
+		<script src="/docByq/js/jquery-3.3.1.min.js"></script>
+		<script src="/docByq/js/bootstrap.min.js"></script>
+		<script src="/docByq/js/owl.carousel.min.js"></script>
+		<script src="/docByq/js/jquery.fancybox.min.js"></script>
+		<script src="/docByq/js/jquery-ui.min.js"></script>
+		<script src="/docByq/js/jquery.nice-select.js"></script>
+		<script src="/docByq/js/coreNavigation-1.1.3.min.js"></script>
+		<script src="/docByq/js/popper.min.js"></script>
+		<script src="/docByq/js/script.js"></script>
+
+		<input type="hidden" id="id">
+	</body>
+	<script>
+		userInfo(function (res) {
+			console.log("失败")
+			console.log(res)
+			if (res.code == 500) {
+
+			} else {
+				$("#username").text(res.data.userInfo.username);
+				$("#id").val(res.data.id);
+				$("#dome1").append("<i class=\"layui-icon layui-icon-down layui-font-12\"></i>");
+				layui.use('dropdown', function () {
+					var dropdown = layui.dropdown
+					dropdown.render({
+						elem: '#demo1' //可绑定在任意元素中，此处以上述按钮为例
+						, data: [{
+							title: '修改密码'
+							, id: 100
+							//,href: '#'
+						}, {
+							title: '个人信息'
+							, id: 101
+							//,href: 'https://www.layui.com/' //开启超链接
+							//,target: '_blank' //新窗口方式打开
+						}, {
+							title: '我的收藏'
+							, id: 101
+							, href: '/reception/toForumByMy?id=' + res.data.id //开启超链接
+							//,target: '_blank' //新窗口方式打开
+						}, {
+							title: '我的留言'
+							, id: 101
+							, href: '/reception/toMyProposal?id=' + res.data.id //开启超链接
+							//,target: '_blank' //新窗口方式打开
+						}, {
+							title: '我的预约'
+							, id: 101
+							,href: '/reception//toMyReserve?id='+res.data.id //开启超链接
+							//,target: '_blank' //新窗口方式打开
+						}
+						]
+						, id: 'demo1'
+						//菜单被点击的事件
+						, click: function (obj) {
+							console.log(obj);
+							if (obj.title == '修改密码') {
+								xadmin.open('修改密码', '/reception/toPassword', '580', '600', false);
+								// layer.msg('修改密码');
+							}
+							if (obj.title == '个人信息') {
+								xadmin.open('修改密码', '/reception/toUserInfo', '580', '600', false);
+								// layer.msg('个人信息');
+							}
+
+
+						}
+					});
+				});
+			}
+
+		})
+
+		function reyc() {
+			var id = $("#id").val();
+			if (id==''||id==null){
+				window.location.href='/login/user';
+			}
+			xadmin.open('预约煎药', '/reception/toreYc', '580', '600', false);
+		}
+
+		function reys() {
+			var id = $("#id").val();
+			if (id==''||id==null){
+				window.location.href='/login/user';
+			}
+			xadmin.open('预约面诊', '/reception/toreYs', '580', '600', false);
+		}
+	</script>
+</html>

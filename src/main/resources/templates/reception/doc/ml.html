@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>杏林堂中医馆</title>
+        <link rel="shortcut icon" href="/docByq/img/logo/favicon.png">
+
+        <!-- FONT_AWESOME -->
+        <link rel="stylesheet" href="/docByq/css/all.min.css">
+        <link rel="stylesheet" href="/docByq/css/fontawesome.min.css">
+
+        <!-- THEMIFY ICON -->
+        <link rel="stylesheet" href="/docByq/css/themify-icons.css">
+
+        <!-- X-ICON -->
+        <link rel="stylesheet" href="/docByq/css/xicon.css">
+
+        <!-- OWL CAROUSEL -->
+        <link rel="stylesheet" href="/docByq/css/owl.carousel.min.css">
+
+        <!-- CORE NAVIGATION -->
+        <link rel="stylesheet" href="/docByq/css/coreNavigation-1.1.3.min.css">
+
+
+        <!-- FANCY-BOX -->
+        <link rel="stylesheet" href="/docByq/css/jquery.fancybox.min.css">
+
+        <!-- BOOTSTRAP -->
+        <link rel="stylesheet" href="/docByq/css/bootstrap.min.css">
+
+        <!-- PERSONAL STYLE -->
+        <link rel="stylesheet" href="/docByq/scss/style.css">
+        <link rel="stylesheet" href="/docByq/css/responsive.css">
+        <script src="/js/HttpUtil.js"></script>
+
+        <link rel="stylesheet" href="/doc/lib/layui-v2.6.3/css/layui.css">
+    </head>
+
+    <body>
+
+        <!-- Preloader -->
+
+        <div id="preloader">
+            <div id="status">
+                <img src="/docByq/img/logo/favicon.png" alt="perloader">
+            </div>
+        </div>
+
+        <!-- Header Top Bar Start -->
+
+        <div class="header-top-bar d-md-block d-none">
+            <div class="container">
+                <div class="head-content d-md-flex d-block align-items-center">
+                    <div class="logo d-none d-lg-block">
+                        <a href="/"><img src="/docByq/img/logo/logo.png" alt=""></a>
+                    </div>
+                    <div class="ml-auto content" style="color: aliceblue;">
+                        <i class="ti-time"></i>
+                        工作日： 08:00-19:00 <br>
+                        星期六 和 星期天 - 休息
+                    </div>
+                    <div class=" content" >
+                        <i class="ti-mobile"></i>
+                        <div class="" >
+                            <a style="color: aliceblue;" href="#">(+86) 0777-8569442</a>
+                            <br>
+                            <a style="color: aliceblue;" href="#"></a>
+                        </div>
+                    </div>
+                    <div class="content" style="color: aliceblue;">
+                        <i class="ti-location-pin"></i>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Header Start -->
+        <header class="header">
+            <nav class="">
+                <!-- Mobile -->
+                <div class="nav-header right">
+                    <a href="/" class="brand d-lg-none d-block">
+                        <img src="/docByq/img/logo/logo.png" alt="">
+                    </a>
+                    <button class="toggle-bar"><span class="fa fa-bars"></span></button>
+                </div>
+                <div class="header-btn">
+                    <a href="/login/user" class="btn btn-secondary" id="demo1">
+                        <i class="fas fa-lock"></i><span id="username">登录</span>
+                    </a>
+
+                </div>
+                <ul class="menu">
+                    <li ><a href="/">网站首页</a></li>
+                    <li class="dropdown active">
+                        <a href="#">重点专科</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown active">
+                                <a href="#">专家团队</a>
+                                <ul class="dropdown-menu left-auto">
+                                    <li><a href="/reception/Department">科室分类</a></li>
+                                    <li class="active"><a href="/reception/expert">专家名录</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#">中药专区</a>
+                                <ul class="dropdown-menu left-auto">
+                                    <li><a href="/reception/toDrugs">道地药材</a></li>
+                                    <li onclick="reyc()"><a >煎药预约</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">看诊服务</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/reception/chat">线上问诊</a></li>
+                            <li onclick="reys()"><a >预约面诊</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/reception/toForum">中医健康科普</a></li>
+                    <li><a href="/reception/about">关于我们</a></li>
+
+                </ul>
+
+            </nav>
+        </header>
+        <!-- Header End -->
+
+        <!-- SERVICE PAGE BANNER -->
+
+        <div class="page-banner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-banner-content">
+                            <div class="d-sm-flex justify-content-between align-items-center">
+                                <div class="title">
+                                    <h6 class="text-left text-capitalized">专家名录</h6>
+                                    <h2>我们的专家</h2>
+                                </div>
+                                <div class="link text-sm-right text-left">
+                                    <a href="./home.html">主页 <i class="ti-angle-double-right"></i></a>
+                                    专家名录
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SERVICE PAGE BANNER  END-->
+
+        <!-- DEPARTMENT SECTION START -->
+
+        <section class="department-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-title text-left">
+                            <h2> 我们的 <span>专家</span></h2>
+                            <p>
+                                专业团队值得您放心
+                            </p>
+                            <div class="section-border">
+                                <div class="icon">
+                                    <i class="fas fa-tint"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="department-block text-left">
+                            <div class="bg">
+                                <img src="/docByq/img/doctor/1.jpg" alt="">
+                            </div>
+                            <div class="item-block-03 text-left">
+                                <div class="item-content">
+                                    <div class="right-side">
+                                        <h5><a href="#">张震</a></h5>
+                                    </div>
+                                    <p>
+                                        特邀会诊专家、国医大师、全国名老中医、云南省荣誉名中医、圣爱中医馆高级顾问、 云南省中医中药研究院资深研究员.
+                                        专家擅长：疑难杂症 内科、妇科、儿科、五官科和皮肤科等疑难杂症，尤其对老年病、心脑血管、呼吸系统、等疾病。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="department-block text-left">
+                            <div class="bg">
+                                <img src="/docByq/img/doctor/3.jpg" alt="">
+                            </div>
+                            <div class="item-block-03 text-left">
+                                <div class="item-content">
+                                    <div class="right-side">
+                                        <h5><a href="#">杨荣辉</a></h5>
+                                    </div>
+                                    <p>
+                                        副教授、云南省名中医、李氏中医学术流派传人。专家擅长：胃肠病、肝病、肾病 消化系统疾病：慢性胃炎、十二指肠胃炎、
+                                        胆囊炎、乙肝、肝硬化（腹水）、腹泻、便秘、结肠炎； 泌尿系统疾病：肾炎、尿路感染、肾结石、睾丸炎、附睾炎。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="department-block text-left">
+                            <div class="bg">
+                                <img src="/docByq/img/doctor/9.jpg" alt="">
+                            </div>
+                            <div class="item-block-03 text-left">
+                                <div class="item-content">
+                                    <div class="right-side">
+                                        <h5><a href="#">李庆生</a></h5>
+                                    </div>
+                                    <p>
+                                        二级教授、云南省名中医、博士研究生导师、加拿大多伦多大学访问学者、国家中医药管理局及省级重点学科学术带头人。
+                                        专家擅长：擅长诊治中医内、妇、儿、皮肤科及杂病的疑难病证，过敏性疾病，如：过敏性皮炎、湿疹、荨麻疹。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="department-block text-left">
+                            <div class="bg">
+                                <img src="/docByq/img/doctor/6.jpg" alt="">
+                            </div>
+                            <div class="item-block-03 text-left">
+                                <div class="item-content">
+                                    <div class="right-side">
+                                        <h5><a href="#">张良英</a></h5>
+                                    </div>
+                                    <p>
+                                        全国名中医、主任医师、全国名老中医药专家、学术经验继承工作指导老师,专家擅长：不孕症、孕期保胎、月经不调
+                                        妇科疾病：痛经、闭经、崩漏、妇科炎症、更年期综合征、妇科疑难杂症、孕前调理、产后调理、乳腺疾病。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="department-block text-left">
+                            <div class="bg">
+                                <img src="/docByq/img/doctor/4.jpg" alt="">
+                            </div>
+                            <div class="item-block-03 text-left">
+                                <div class="item-content">
+                                    <div class="right-side">
+                                        <h5><a href="#">管遵惠</a></h5>
+                                    </div>
+                                    <p>
+                                        特邀会诊专家、主任医师、全国老中医药专家学术经验继承工作指导老师、云南省名中医、管氏针灸学术流派第四代传人。
+                                        专家擅长：小儿脑瘫、面瘫。治疗各种常见病、如骨关节疼痛、腰椎间盘突出、腰肌劳损症等。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="department-block text-left">
+                            <div class="bg">
+                                <img src="/docByq/img/doctor/8.jpg" alt="">
+                            </div>
+                            <div class="item-block-03 text-left">
+                                <div class="item-content">
+                                    <div class="right-side">
+                                        <h5><a href="#">吴荣祖</a></h5>
+                                    </div>
+                                    <p>
+                                        全国名中医、主任医师、吴佩衡扶阳学术流派第二代传人、云南省国医名师、云南省名中医、昆明市荣誉名中医、博士生导师、
+                                        全国老中医药专家学术经验继承工作指导老师。专家擅长：内科、妇科、儿科、疑难杂症。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="department-block text-left">
+                            <div class="bg">
+                                <img src="/docByq/img/doctor/2.jpg" alt="">
+                            </div>
+                            <div class="item-block-03 text-left">
+                                <div class="item-content">
+                                    <div class="right-side">
+                                        <h5><a href="#">戴天浩</a></h5>
+                                    </div>
+                                    <p>
+                                        特邀会诊专家、副主任医师、云南省名中医、戴氏中医学术流派传人。专家擅长：肾病、发热、咳嗽。儿科、内科疾病：
+                                        感冒、扁桃体炎、肺炎、腹泻便秘、肾炎、小儿遗尿、湿疹、急慢性肾炎、肾病综合症、肾盂肾炎、急慢性咽炎、肺炎、高血压、冠心病。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="department-block text-left">
+                            <div class="bg">
+                                <img src="/docByq/img/doctor/7.jpg" alt="">
+                            </div>
+                            <div class="item-block-03 text-left">
+                                <div class="item-content">
+                                    <div class="right-side">
+                                        <h5><a href="#">姚克敏</a></h5>
+                                    </div>
+                                    <p>
+                                        全国首批老中医药专家学术经验继承工作指导老师、云南省国医名师、姚氏中医学术流派第六代传人。专家擅长：
+                                        妇科不孕症、 多囊卵巢综合征、习惯性流产、各类疑难杂症疾病、妇科不孕症、经、带、孕、胎、乳有独特的诊疗经验。
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="department-block text-left">
+                            <div class="bg">
+                                <img src="/docByq/img/doctor/5.jpg" alt="">
+                            </div>
+                            <div class="item-block-03 text-left">
+                                <div class="item-content">
+                                    <div class="right-side">
+                                        <h5><a href="#">成诗黔</a></h5>
+                                    </div>
+                                    <p>
+                                        特邀会诊专家、全军突出贡献中医专家、原昆明解放军总医院副院长、中医科主任、药理基地主任、主任医师、教授。
+                                        专家擅长：癫痫、妇科疑难杂症、子宫内膜异位症、男女不孕不育症、产后康复调理、顽固性哮喘、消化、泌尿及脑血管等系统相关疾病。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </section>
+
+        <!-- DEPARTMENT SECTION END -->
+
+        <!-- FOOTER START -->
+
+        <footer class="footer-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="footer-content d-md-flex justify-content-between align-items-center text-center">
+                            <p>Copyright © 2023 <a href="#">nnnu.com</a> 最终解释权属于yyc
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- FOOTER END -->
+
+<input type="hidden" id="id"/>
+
+
+
+        <script src="/docByq/js/jquery-3.3.1.min.js"></script>
+        <script src="/docByq/js/bootstrap.min.js"></script>
+        <script src="/docByq/js/owl.carousel.min.js"></script>
+        <script src="/docByq/js/jquery.fancybox.min.js"></script>
+        <script src="/docByq/js/coreNavigation-1.1.3.min.js"></script>
+        <script src="/docByq/js/popper.min.js"></script>
+        <script src="/docByq/js/script.js"></script>
+        <script src="/doc/lib/layui-v2.6.3/layui.js"></script>
+        <script type="text/javascript" src="/js/xadmin.js"></script>
+
+    </body>
+<script>
+    userInfo(function (res) {
+        console.log("失败")
+        console.log(res)
+        if (res.code == 500) {
+
+        } else {
+            $("#username").text(res.data.userInfo.username);
+            $("#id").val(res.data.id);
+            $("#dome1").append("<i class=\"layui-icon layui-icon-down layui-font-12\"></i>");
+            layui.use('dropdown', function () {
+                var dropdown = layui.dropdown
+                dropdown.render({
+                    elem: '#demo1' //可绑定在任意元素中，此处以上述按钮为例
+                    , data: [{
+                        title: '修改密码'
+                        , id: 100
+                        //,href: '#'
+                    }, {
+                        title: '个人信息'
+                        , id: 101
+                        //,href: 'https://www.layui.com/' //开启超链接
+                        //,target: '_blank' //新窗口方式打开
+                    }, {
+                        title: '我的收藏'
+                        , id: 101
+                        , href: '/reception/toForumByMy?id=' + res.data.id //开启超链接
+                        //,target: '_blank' //新窗口方式打开
+                    }, {
+                        title: '我的留言'
+                        , id: 101
+                        , href: '/reception/toMyProposal?id=' + res.data.id //开启超链接
+                        //,target: '_blank' //新窗口方式打开
+                    }, {
+                        title: '我的预约'
+                        , id: 101
+                        ,href: '/reception//toMyReserve?id='+res.data.id //开启超链接
+                        //,target: '_blank' //新窗口方式打开
+                    }
+                    ]
+                    , id: 'demo1'
+                    //菜单被点击的事件
+                    , click: function (obj) {
+                        console.log(obj);
+                        if (obj.title == '修改密码') {
+                            xadmin.open('修改密码', '/reception/toPassword', '580', '600', false);
+                            // layer.msg('修改密码');
+                        }
+                        if (obj.title == '个人信息') {
+                            xadmin.open('修改密码', '/reception/toUserInfo', '580', '600', false);
+                            // layer.msg('个人信息');
+                        }
+
+
+                    }
+                });
+            });
+        }
+
+    })
+
+    function reyc() {
+        var id = $("#id").val();
+        if (id==''||id==null){
+            window.location.href='/login/user';
+        }
+        xadmin.open('预约煎药', '/reception/toreYc', '580', '600', false);
+    }
+
+    function reys() {
+        var id = $("#id").val();
+        if (id==''||id==null){
+            window.location.href='/login/user';
+        }
+        xadmin.open('预约面诊', '/reception/toreYs', '580', '600', false);
+    }
+</script>
+</html>

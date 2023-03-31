@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>煎药预约</title>
+    <script src="/docByq/js/jquery-3.3.1.min.js"></script>
+    <script src="/doc/lib/layui-v2.6.3/layui.js"></script>
+    <link rel="stylesheet" href="/doc/lib/layui-v2.6.3/css/layui.css">
+    <script src="/js/HttpUtil.js"></script>
+</head>
+<body>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">输入名字</label>
+        <div class="layui-input-block">
+            <input type="hidden" id="id" name="userId" >
+            <input type="text" name="name" required  lay-verify="required" placeholder="请输入名字" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">输入手机号</label>
+        <div class="layui-input-block">
+            <input type="text" name="phone" required  lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">预约时间</label>
+        <div class="layui-input-block">
+            <input type="text" name="time" class="layui-input" id="test1">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use(['form','laydate'], function(){
+        var form = layui.form,laydate = layui.laydate;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            // layer.msg(JSON.stringify(data.field));
+            $.ajax({
+                url: "/receptionApi/addJy",
+                method: 'post',
+                data:data.field,
+                success:function (res) {
+                    console.log(res)
+                    if (res.code==200){
+                        layer.msg("添加成功");
+                    }else {
+                        layer.msg("添加失败");
+                    }
+                    var index=parent.layer.getFrameIndex(window.name); //获取当前窗口的name
+                    parent.layer.close(index);//关闭窗口
+                }
+            })
+
+            return false;
+        });
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test1' //指定元素
+            ,type: 'datetime'
+        });
+    });
+    userInfo(function (res){
+        $("#id").val(res.data.id);
+    })
+</script>
+</body>
+</html>

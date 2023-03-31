@@ -1,0 +1,264 @@
+<head>
+    <meta charset="UTF-8">
+    <title>CodePen - Messaging App UI with Dark Mode</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <script src="/docByq/js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="/chat/css/style.css">
+    <script src="/chat/js/script.js"></script>
+    <script src="/js/HttpUtil.js"></script>
+    <script src="/doc/lib/layui-v2.6.3/layui.js"></script>
+
+
+</head>
+
+<body>
+
+<input hidden="hidden" id="toUser" value="aa">
+<!-- 老中医的ID-->
+<input hidden="hidden" id="sionId">
+
+<input hidden="hidden" id="OtherSionId">
+<div class="app">
+
+    <div class="wrapper">
+        <!-- 左边用户信息 -->
+        <div class="conversation-area">
+            <div id="id1">
+                <!--                    <div class="msg online" onclick="selectActive(this)">-->
+                <!--                        <div class="msg-profile group">-->
+                <!--                            <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"-->
+                <!--                                 stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">-->
+                <!--                                <path d="M12 2l10 6.5v7L12 22 2 15.5v-7L12 2zM12 22v-6.5"></path>-->
+                <!--                                <path d="M22 8.5l-10 7-10-7"></path>-->
+                <!--                                <path d="M2 15.5l10-7 10 7M12 2v6.5"></path>-->
+                <!--                            </svg>-->
+                <!--                        </div>-->
+                <!--                        <div class="msg-detail">-->
+                <!--                            <div class="msg-username">大山</div>-->
+                <!--                            <div class="msg-content">-->
+                <!--                                <span class="msg-message">求救</span>-->
+                <!--                                <span class="msg-date">28m</span>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+            </div>
+            <button class="add" onclick="conectWebSocket()"></button>
+        </div>
+
+        <!-- 中间 -->
+        <div class="chat-area" id="ck">
+            <div class="chat-area-header">
+                <!-- 聊天标题-->
+                <div class="chat-area-title">统一回复窗口</div>
+            </div>
+            <div class="chat-area-main" id="chat">
+                <!-- 聊天头像-->
+
+
+
+            </div>
+
+
+            <div class="chat-area-footer" >
+                <input class="feather feather-image" id="fileInput" style="max-width: 15%" type="file" onchange="sendImage(this)">
+
+                <input id="text" type="text" placeholder="Type something here...">
+
+                <button onclick="send()" class="feather feather-smile" style="width: 60px; height: 30px;background: #3399FF; border: none; color:#fff;">发送</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    var websocket = null;
+
+    function conectWebSocket() {
+
+        var toUser = document.getElementById('toUser').value;
+        //判断当前浏览器是否支持WebSocket
+        if ('WebSocket' in window) {
+            websocket = new WebSocket("ws://localhost:8080/websocket/" + toUser);
+        } else {
+            alert('不支持websocket')
+        }
+        //连接发生错误的回调方法
+        websocket.onerror = function () {
+            setMessageInnerHTML("error");
+        };
+        //连接成功建立的回调方法
+        websocket.onopen = function (event) {
+            layer.msg(toUser + "成功建立连接")
+            // setMessageInnerHTML("Loc MSG: 成功建立连接");
+        }
+        //接收到消息的回调方法
+        websocket.onmessage = function (event) {
+            // console.log(event.data)
+
+                var s = JSON.parse(event.data);
+                // console.log(JSON.parse(event.data))
+                if (!s.laoZonYiId == '' && s.laoZonYiId != null) {
+                    $("#sionId").val(s.laoZonYiId)
+                }
+                if (!s.passageway == '' && s.passageway != null){
+                    addnode(s.passageway)
+                }
+                if (!s.img == '' && s.img != null){
+                    var result = "data:image/jpeg;base64,"+ s.img;
+                    addMsgByAdminImg(result)
+                }else {
+                    addMsgByUser(s.msg,s.fromUser);
+                }
+            //滚动条滚动到最底下
+            $("#ck").scrollTop($("#chat")[0].scrollHeight);
+        }
+        //连接关闭的回调方法
+        websocket.onclose = function () {
+            setMessageInnerHTML("Loc MSG:关闭连接");
+        }
+        //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+        window.onbeforeunload = function () {
+            websocket.close();
+        }
+    }
+
+
+    //关闭连接
+    function closeWebSocket() {
+        websocket.close();
+    }
+
+    //发送消息
+    function send() {
+        //获取输入的文本信息进行发送
+        var message = $("#text").val();
+        var toUser = $("#OtherSionId").val();
+        addMsg(message);
+        var socketMsg = { msg: message, toUser: toUser};
+        //滚动条滚动到最底下
+        $("#ck").scrollTop($("#chat")[0].scrollHeight);
+        websocket.send(JSON.stringify(socketMsg));
+    }
+
+
+    async function sendImage(event) {
+        var toUser = $("#OtherSionId").val();
+        const file = event.files[0];
+        const base64 = await fileToBase64(file);
+        // console.log(base64);
+        base = base64;
+        var result = "data:image/jpeg;base64,"+ base64;
+
+        addMsgImg(result)
+        var socketMsg = {img: base64, toUser: toUser};
+        //滚动条滚动到最底下
+        $("#ck").scrollTop($("#chat")[0].scrollHeight);
+        websocket.send(JSON.stringify(socketMsg));
+    }
+
+    function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result.split(',')[1]);
+            reader.onerror = error => reject(error);
+        });
+    }
+
+    userInfo(function (res) {
+        console.log(res)
+        $("#toUser").val(res.data.userInfo.username)
+    })
+
+    function selectActive(even) {
+        // console.log(even)
+        $(even).addClass("active");
+        $(even).siblings().removeClass("active");
+        console.log($(even).attr("id"));
+        $("#OtherSionId").val($(even).attr("id"));
+    }
+
+    function addnode(id) {
+        var $html = $('<div class="msg online" id=' + id + ' onclick="selectActive(this)">\n' +
+            '            <div class="msg-profile group">\n' +
+            '                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"\n' +
+            '                     stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">\n' +
+            '                    <path d="M12 2l10 6.5v7L12 22 2 15.5v-7L12 2zM12 22v-6.5"></path>\n' +
+            '                    <path d="M22 8.5l-10 7-10-7"></path>\n' +
+            '                    <path d="M2 15.5l10-7 10 7M12 2v6.5"></path>\n' +
+            '                </svg>\n' +
+            '            </div>\n' +
+            '            <div class="msg-detail">\n' +
+            '                <div class="msg-username">游客' + id + '</div>\n' +
+            '                <div class="msg-content">\n' +
+            '                    <span class="msg-message">求助</span>\n' +
+            '                    <span class="msg-date">1000m</span>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '        </div>');
+        $("#id1").append($html);
+    }
+    function addMsgByAdminImg(msg) {
+        var $html = $('<div class="chat-msg">\n' +
+            '                        <div class="chat-msg-profile">\n' +
+            '                            <img class="chat-msg-img" src="/chat/img/1.png" alt="">\n' +
+            '                            <div class="chat-msg-date">' + '医生' + '</div>\n' +
+            '                        </div>\n' +
+            '\n' +
+            '                        <!-- 聊天内容-->\n' +
+            '                        <div class="chat-msg-content">\n' +
+            '                            <div class="chat-msg-text"><img src=' + msg + '></div>\n' +
+            '                        </div>\n' +
+            '                    </div>');
+        $("#chat").append($html);
+    }
+
+    function addMsgImg(msg) {
+        var $html = $('<div class="chat-msg owner">\n' +
+            '                    <div class="chat-msg-profile">\n' +
+            '                        <img class="chat-msg-img" src="/chat/img/1.png" alt="">\n' +
+            '                        <div class="chat-msg-date">我</div>\n' +
+            '                    </div>\n' +
+            '                    <div class="chat-msg-content">\n' +
+            '                        <div class="chat-msg-text"><img src=' + msg + '></div>\n' +
+            '                    </div>\n' +
+            '                </div>');
+        $("#chat").append($html);
+    }
+
+
+    function addMsgByUser(msg,id) {
+        var username = "游客"+id;
+        var $html = $('<div class="chat-msg">\n' +
+            '                        <div class="chat-msg-profile">\n' +
+            '                            <img class="chat-msg-img" src="/chat/img/1.png" alt="">\n' +
+            '                            <div class="chat-msg-date">'+username+'</div>\n' +
+            '                        </div>\n' +
+            '\n' +
+            '                        <!-- 聊天内容-->\n' +
+            '                        <div class="chat-msg-content">\n' +
+            '                            <div class="chat-msg-text">'+msg+'</div>\n' +
+            '                        </div>\n' +
+            '                    </div>');
+        $("#chat").append($html);
+    }
+
+    function addMsg(msg){
+        var $html = $('<div class="chat-msg owner">\n' +
+            '                    <div class="chat-msg-profile">\n' +
+            '                        <img class="chat-msg-img" src="/chat/img/1.png" alt="">\n' +
+            '                        <div class="chat-msg-date">老中医</div>\n' +
+            '                    </div>\n' +
+            '                    <div class="chat-msg-content">\n' +
+            '                        <div class="chat-msg-text">'+msg+'</div>\n' +
+            '                    </div>\n' +
+            '                </div>');
+        $("#chat").append($html);
+    }
+
+
+
+</script>
+

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>杏林堂中医馆</title>
+    <script src="/doc/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <link rel="shortcut icon" href="/docByq/img/logo/favicon.png">
+
+    <!-- FONT_AWESOME -->
+    <link rel="stylesheet" href="/docByq/css/all.min.css">
+    <link rel="stylesheet" href="/docByq/css/fontawesome.min.css">
+
+    <!-- THEMIFY ICON -->
+    <link rel="stylesheet" href="/docByq/css/themify-icons.css">
+
+    <!-- X-ICON -->
+    <link rel="stylesheet" href="/docByq/css/xicon.css">
+
+    <!-- OWL CAROUSEL -->
+    <link rel="stylesheet" href="/docByq/css/owl.carousel.min.css">
+
+    <!-- CORE NAVIGATION -->
+    <link rel="stylesheet" href="/docByq/css/coreNavigation-1.1.3.min.css">
+
+
+    <!-- FANCY-BOX -->
+    <link rel="stylesheet" href="/docByq/css/jquery.fancybox.min.css">
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="/docByq/css/bootstrap.min.css">
+
+    <!-- PERSONAL STYLE -->
+    <link rel="stylesheet" href="/docByq/scss/style.css">
+    <link rel="stylesheet" href="/docByq/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+    <link rel="stylesheet" href="/chat/css/style.css">
+
+    <script src="/chat/js/script.js"></script>
+    <script type="text/javascript" src="/js/xadmin.js"></script>
+    <script src="/js/HttpUtil.js"></script>
+    <script src="/doc/lib/layui-v2.6.3/layui.js"></script>
+    <link rel="stylesheet" href="/doc/lib/layui-v2.6.3/css/layui.css">
+
+</head>
+
+<body>
+
+<!-- Preloader -->
+
+<div id="preloader">
+    <div id="status">
+        <img src="/docByq/img/logo/favicon.png" alt="perloader">
+    </div>
+</div>
+
+<!-- Header Top Bar Start -->
+
+
+<div class="header-top-bar d-md-block d-none">
+    <div class="container">
+        <div class="head-content d-md-flex d-block align-items-center">
+            <div class="logo d-none d-lg-block" style="width: 180px">
+                <a href="./home.html"><img src="/docByq/img/logo/logo.png" alt=""></a>
+            </div>
+            <div class="ml-auto content" style="color: aliceblue;">
+                <i class="ti-time"></i>
+                工作日： 08:00-19:00 <br>
+                星期六 和 星期天 - 休息
+            </div>
+            <div class=" content" >
+                <i class="ti-mobile"></i>
+                <div class="" >
+                    <a style="color: aliceblue;" href="#">(+86) 0777-8569442</a>
+                    <br>
+                    <a style="color: aliceblue;" href="#">yyc@nnnu.com</a>
+                </div>
+            </div>
+            <div class="content" style="color: aliceblue;">
+                <i class="ti-location-pin"></i>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Header Start -->
+
+<!-- Header Start -->
+
+<header class="header">
+    <nav class="">
+        <!-- Mobile -->
+        <div class="nav-header right">
+            <a href="/" class="brand d-lg-none d-block">
+                <img src="/docByq/img/logo/logo.png" alt="">
+            </a>
+            <button class="toggle-bar"><span class="fa fa-bars"></span></button>
+        </div>
+        <div class="header-btn">
+            <a href="/login/user" class="btn btn-secondary" id="demo1">
+                <i class="fas fa-lock"></i><span id="username">登录</span>
+            </a>
+
+        </div>
+        <ul class="menu">
+            <li class="active"><a href="/">网站首页</a></li>
+            <li class="dropdown">
+                <a href="#">重点专科</a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown">
+                        <a href="#">专家团队</a>
+                        <ul class="dropdown-menu left-auto">
+                            <li><a href="/reception/Department">科室分类</a></li>
+                            <li><a href="/reception/expert">专家名录</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">中药专区</a>
+                        <ul class="dropdown-menu left-auto">
+                            <li><a href="/reception/toDrugs">道地药材</a></li>
+                            <li onclick="reyc()"><a >煎药预约</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">看诊服务</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/reception/chat">线上问诊</a></li>
+                    <li onclick="reys()"><a >预约面诊</a></li>
+                </ul>
+            </li>
+            <li><a href="/reception/toForum">中医健康科普</a></li>
+            <li><a href="/reception/about">关于我们</a></li>
+
+        </ul>
+
+    </nav>
+</header>
+<!-- Header End -->
+<!-- Header End -->
+
+<!-- SERVICE PAGE BANNER -->
+
+<div class="page-banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-banner-content">
+                    <div class="d-sm-flex justify-content-between align-items-center">
+                        <div class="title">
+                            <h6 class="text-left text-capitalized">在线问诊</h6>
+                            <h2>您的问题我们都会耐心回答</h2>
+                        </div>
+                        <div class="link text-sm-right text-left">
+                            <a href="/">主页 <i class="ti-angle-double-right"></i></a>
+                            在线问诊
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="id"/>
+<input hidden="hidden" id="toUser" value="游客">
+<input hidden="hidden" id="sionId">
+<!-- 中间 -->
+<div class="chat-area">
+    <div class="chat-area-header">
+        <!-- 聊天标题-->
+        <div class="chat-area-title">客服</div>
+    </div>
+    <div class="chat-area-main" id="chat" style="margin-bottom: 50px">
+
+    </div>
+
+
+    <div class="chat-area-footer" style="position: fixed;bottom: 0;">
+        <!--        <svg onclick="sendImage()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"-->
+        <!--             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image">-->
+        <!--            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>-->
+        <!--            <circle cx="8.5" cy="8.5" r="1.5"></circle>-->
+        <!--            <path d="M21 15l-5-5L5 21"></path>-->
+        <!--        </svg>-->
+        <input class="feather feather-image" id="fileInput" style="max-width: 15%" type="file"
+               onchange="sendImage(this)">
+
+        <input id="text" type="text" placeholder="Type something here...">
+
+        <button onclick="send()" class="feather feather-smile"
+                style="width: 80px; height: 30px;background: #3399FF; border: none; color:#fff;">发送
+        </button>
+    </div>
+</div>
+
+<!-- FOOTER START -->
+
+<!--		<footer class="footer-section">-->
+<!--			<div class="container">-->
+<!--				<div class="row">-->
+<!--					<div class="col-12">-->
+<!--						<div class="footer-content d-md-flex justify-content-between align-items-center text-center">-->
+<!--							<p>Copyright © 2023 <a href="#">nnnu.com</a> 最终解释权属于yyc-->
+<!--							</p>-->
+
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</footer>-->
+
+<!-- FOOTER END -->
+
+
+<script src="/docByq/js/jquery-3.3.1.min.js"></script>
+<script src="/docByq/js/bootstrap.min.js"></script>
+<script src="/docByq/js/owl.carousel.min.js"></script>
+<script src="/docByq/js/coreNavigation-1.1.3.min.js"></script>
+<script src="/docByq/js/jquery.fancybox.min.js"></script>
+<script src="/docByq/js/popper.min.js"></script>
+<script src="/docByq/js/script.js"></script>
+<script>
+    var websocket = null;
+
+    function conectWebSocket() {
+
+        var toUser = document.getElementById('toUser').value;
+        //判断当前浏览器是否支持WebSocket
+        if ('WebSocket' in window) {
+            websocket = new WebSocket("ws://localhost:8080/websocket/" + toUser);
+        } else {
+            alert('不支持websocket')
+        }
+        //连接发生错误的回调方法
+        websocket.onerror = function () {
+            setMessageInnerHTML("error");
+        };
+        //连接成功建立的回调方法
+        websocket.onopen = function (event) {
+            layer.msg(toUser + "成功建立连接")
+            // setMessageInnerHTML("Loc MSG: 成功建立连接");
+        }
+        websocket.binaryType = 'arraybuffer';
+        //接收到消息的回调方法
+        websocket.onmessage = function (event) {
+            //判断是不是图片
+            if (event.data instanceof ArrayBuffer) {
+                const blob = new Blob([event.data], {type: 'image/jpeg'});
+                const url = URL.createObjectURL(blob);
+                // img.src = url;
+                addMsgByAdminImg(url);
+            } else {
+                var s = JSON.parse(event.data);
+                if (!s.passageway == '' && s.passageway != null) {
+                    $("#sionId").val(s.passageway)
+                }
+                if (!s.img == '' && s.img != null) {
+                    var result = "data:image/jpeg;base64," + s.img;
+                    addMsgByAdminImg(result)
+                } else {
+                    addMsgByAdmin(s.msg);
+                }
+
+            }
+            //滚动条滚动到最底下
+            $("#ck").scrollTop($("#chat")[0].scrollHeight);
+        }
+
+
+        //连接关闭的回调方法
+        websocket.onclose = function (res) {
+            console.log(res)
+            // setMessageInnerHTML("Loc MSG:关闭连接");
+        }
+        //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+        window.onbeforeunload = function () {
+            websocket.close();
+        }
+    }
+
+    conectWebSocket();
+
+
+    //关闭连接
+    function closeWebSocket() {
+        websocket.close();
+    }
+
+    let base;
+
+    //发送消息
+    function send() {
+        //获取输入的文本信息进行发送
+        var message = $("#text").val();
+        var fromUser = $("#sionId").val();
+        var socketMsg = {msg: message, fromUser: fromUser};
+        addMsg(message)
+        //滚动条滚动到最底下
+        $("#ck").scrollTop($("#chat")[0].scrollHeight);
+        websocket.send(JSON.stringify(socketMsg));
+    }
+
+    async function sendImage(event) {
+        const file = event.files[0];
+        const base64 = await fileToBase64(file);
+        // console.log(base64);
+        base = base64;
+        var result = "data:image/jpeg;base64," + base64;
+        addMsgImg(result)
+        var fromUser = $("#sionId").val();
+        var socketMsg = {img: base64, fromUser: fromUser};
+        // console.log(JSON.stringify(socketMsg))
+        websocket.send(JSON.stringify(socketMsg));
+        //滚动条滚动到最底下
+        $("#ck").scrollTop($("#chat")[0].scrollHeight);
+
+    }
+
+    function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result.split(',')[1]);
+            reader.onerror = error => reject(error);
+        });
+    }
+
+
+    function addMsgByAdmin(msg) {
+        var $html = $('<div class="chat-msg">\n' +
+            '                        <div class="chat-msg-profile">\n' +
+            '                            <img class="chat-msg-img" src="/chat/img/1.png" alt="">\n' +
+            '                            <div class="chat-msg-date">' + '医生' + '</div>\n' +
+            '                        </div>\n' +
+            '\n' +
+            '                        <!-- 聊天内容-->\n' +
+            '                        <div class="chat-msg-content">\n' +
+            '                            <div class="chat-msg-text">' + msg + '</div>\n' +
+            '                        </div>\n' +
+            '                    </div>');
+        $("#chat").append($html);
+    }
+
+    function addMsgByAdminImg(msg) {
+        var $html = $('<div class="chat-msg">\n' +
+            '                        <div class="chat-msg-profile">\n' +
+            '                            <img class="chat-msg-img" src="/chat/img/1.png" alt="">\n' +
+            '                            <div class="chat-msg-date">' + '医生' + '</div>\n' +
+            '                        </div>\n' +
+            '\n' +
+            '                        <!-- 聊天内容-->\n' +
+            '                        <div class="chat-msg-content">\n' +
+            '                            <div class="chat-msg-text"><img src=' + msg + '></div>\n' +
+            '                        </div>\n' +
+            '                    </div>');
+        $("#chat").append($html);
+    }
+
+    function addMsgImg(msg) {
+        var $html = $('<div class="chat-msg owner">\n' +
+            '                    <div class="chat-msg-profile">\n' +
+            '                        <img class="chat-msg-img" src="/chat/img/1.png" alt="">\n' +
+            '                        <div class="chat-msg-date">我</div>\n' +
+            '                    </div>\n' +
+            '                    <div class="chat-msg-content">\n' +
+            '                        <div class="chat-msg-text"><img src=' + msg + '></div>\n' +
+            '                    </div>\n' +
+            '                </div>');
+        $("#chat").append($html);
+    }
+
+    function addMsg(msg) {
+        var $html = $('<div class="chat-msg owner">\n' +
+            '                    <div class="chat-msg-profile">\n' +
+            '                        <img class="chat-msg-img" src="/chat/img/1.png" alt="">\n' +
+            '                        <div class="chat-msg-date">我</div>\n' +
+            '                    </div>\n' +
+            '                    <div class="chat-msg-content">\n' +
+            '                        <div class="chat-msg-text">' + msg + '</div>\n' +
+            '                    </div>\n' +
+            '                </div>');
+        $("#chat").append($html);
+    }
+
+    userInfo(function (res) {
+        console.log("失败")
+        console.log(res)
+        if (res.code == 500) {
+
+        } else {
+            $("#username").text(res.data.userInfo.username);
+            $("#id").val(res.data.id);
+            $("#dome1").append("<i class=\"layui-icon layui-icon-down layui-font-12\"></i>");
+            layui.use('dropdown', function () {
+                var dropdown = layui.dropdown
+                dropdown.render({
+                    elem: '#demo1' //可绑定在任意元素中，此处以上述按钮为例
+                    , data: [{
+                        title: '修改密码'
+                        , id: 100
+                        //,href: '#'
+                    }, {
+                        title: '个人信息'
+                        , id: 101
+                        //,href: 'https://www.layui.com/' //开启超链接
+                        //,target: '_blank' //新窗口方式打开
+                    }, {
+                        title: '我的收藏'
+                        , id: 101
+                        , href: '/reception/toForumByMy?id=' + res.data.id //开启超链接
+                        //,target: '_blank' //新窗口方式打开
+                    }, {
+                        title: '我的留言'
+                        , id: 101
+                        , href: '/reception/toMyProposal?id=' + res.data.id //开启超链接
+                        //,target: '_blank' //新窗口方式打开
+                    }, {
+                        title: '我的预约'
+                        , id: 101
+                        ,href: '/reception//toMyReserve?id='+res.data.id //开启超链接
+                        //,target: '_blank' //新窗口方式打开
+                    }
+                    ]
+                    , id: 'demo1'
+                    //菜单被点击的事件
+                    , click: function (obj) {
+                        console.log(obj);
+                        if (obj.title == '修改密码') {
+                            xadmin.open('修改密码', '/reception/toPassword', '580', '600', false);
+                            // layer.msg('修改密码');
+                        }
+                        if (obj.title == '个人信息') {
+                            xadmin.open('修改密码', '/reception/toUserInfo', '580', '600', false);
+                            // layer.msg('个人信息');
+                        }
+
+
+                    }
+                });
+            });
+        }
+
+    })
+
+    function reyc() {
+        var id = $("#id").val();
+        if (id==''||id==null){
+            window.location.href='/login/user';
+        }
+        xadmin.open('预约煎药', '/reception/toreYc', '580', '600', false);
+    }
+
+    function reys() {
+        var id = $("#id").val();
+        if (id==''||id==null){
+            window.location.href='/login/user';
+        }
+        xadmin.open('预约煎药', '/reception/toreYs', '580', '600', false);
+    }
+</script>
+
+
+</body>
+
+</html>

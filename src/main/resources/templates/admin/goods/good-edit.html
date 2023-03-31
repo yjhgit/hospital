@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>用户表单</title>
+  <link rel="stylesheet" href="/adminre/lib/layui/css/layui.css">
+  <script src="/adminre/lib/layui/layui.js" charset="utf-8"></script>
+</head>
+
+<body >
+
+<form class="layui-form " style="margin:20px 0px 0px 20px;">
+  <input type="hidden" id="imagesUrl"/>
+  <input type="hidden" id="id">
+  <div class="layui-form-item">
+    <label class="layui-form-label">药材名称</label>
+    <div class="layui-input-inline">
+      <input type="text" name="name" id="name" lay-verify="required" placeholder="请输入药材名称" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">图片上传</label>
+    <div class="layui-input-inline">
+      <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>
+      <button type="button" class="layui-btn" id="test9">开始上传</button>
+    </div>
+  </div>
+
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">药材简介</label>
+    <div class="layui-input-block">
+      <textarea name="synopsis" lay-verify="required" id="synopsis" placeholder="请输入药材简介" class="layui-textarea"></textarea>
+    </div>
+  </div>
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">药材详情</label>
+    <div class="layui-input-block">
+      <textarea name="drugsInfo" lay-verify="required" id="drugsInfo" placeholder="请输入药材详情" class="layui-textarea"></textarea>
+    </div>
+  </div>
+
+
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+</form>
+<script>
+  layui.use(['upload', 'element','form','jquery'], function(){
+    var form = layui.form ,
+            upload = layui.upload,
+            element = layui.element,
+            layer = layui.layer,
+            $= layui.jquery;
+
+    //监听表单提交
+    form.on('submit(formDemo)', function(data){
+      var goodsName = $.trim($("#name").val());
+      var imagesUrl = $.trim($("#imagesUrl").val());
+      var synopsis = $.trim($("#synopsis").val());
+      var drugsInfo = $.trim($("#drugsInfo").val());
+      var id = $.trim($("#id").val());
+      $.ajax({
+        url: '/adminApi/updateByDrugs',
+        type: 'POST',
+        data:{
+          "name": goodsName,
+          "drugsImg":imagesUrl,//详情id
+          "synopsis":synopsis,
+          "drugsInfo":drugsInfo,
+          "id":id
+        },
+        success:function(data){
+          if(data.code == 200){
+            layer.msg("修改成功",{time:2000},function (){
+              var index=parent.layer.getFrameIndex(window.name); //获取当前窗口的name
+              parent.layer.close(index);//关闭窗口
+            })
+
+          }
+        }
+      })
+      return false;
+    });
+
+    //选完文件后不自动上传
+    upload.render({
+      elem: '#test8'
+      ,url: '/res/uploadByDrugs' //此处配置你自己的上传接口即可
+      ,auto: false
+      //,multiple: true
+      ,bindAction: '#test9'
+      ,done: function(res){
+        //如果上传失败
+        // if(res.code > 0){
+        //   return layer.msg('上传失败');
+        // }
+        layer.msg('上传成功');
+        $("#imagesUrl").val(res.msg);
+        console.log(res.msg)
+      }
+      ,error: function(){
+        //演示失败状态，并实现重传
+        // var demoText = $('#demoText');
+        // demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+        // demoText.find('.demo-reload').on('click', function(){
+        //   uploadInst.upload();
+        // });
+        layer.msg('上传失败');
+      }
+      //进度条
+      ,progress: function(n, elem, e){
+        // element.progress('demo', n + '%'); //可配合 layui 进度条元素使用
+        // if(n == 100){
+        //   layer.msg('上传完毕', {icon: 1});
+        // }
+      }
+    });
+  });
+
+</script>
+</body>
+</html>

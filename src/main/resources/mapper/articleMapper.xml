@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace= "com.yayangchun.traditionalchinesemedicinemuseum.dao.ArticleMapper">
+
+        <delete id="delAllInFor" parameterType="int">
+            DELETE FROM article WHERE id in (${id})
+        </delete>
+
+    <insert id="collection">
+        insert into collect(user_id,article_id) values (#{userid},#{acid})
+    </insert>
+
+    <select id="selecollection" resultType="int">
+        select count(*) from collect where user_id=#{userid} AND article_id=#{acid}
+    </select>
+
+    <select id="seleByacid" resultType="integer">
+        select article_id from collect where user_id=#{userid}
+    </select>
+
+<!--    <delete id="deleteBookById" parameterType="int">-->
+<!--        DELETE FROM book WHERE id=#{id}-->
+<!--    </delete>-->
+<!--    <update id="updateBookById" parameterType="com.example.testspringboot.Book">-->
+<!--        UPDATE book set name=# { name }, author=# {author} WHERE id=#{id}-->
+<!--    </update>-->
+<!--    <select id="getBookById" parameterType="int" resultType="com.example.testspringboot.Book">-->
+<!--        SELECT * FROM book WHERE id=#{id}-->
+<!--    </select>-->
+<!--    <select id="getAllBooks" resultType="com.example.testspringboot.Book">-->
+<!--        SELECT * FROM book-->
+<!--    </select>-->
+</mapper>

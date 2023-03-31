@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace= "com.yayangchun.traditionalchinesemedicinemuseum.dao.UserDao">
+    <select id="findAll" resultType="com.yayangchun.traditionalchinesemedicinemuseum.enity.vo.UserListVo">
+        SELECT user.id,account,power,username,status FROM user,user_info WHERE user.id=user_info.user_id
+    </select>
+    <select id="findAllByName" resultType="com.yayangchun.traditionalchinesemedicinemuseum.enity.vo.UserListVo">
+        SELECT user.id,account,power,username,status FROM user,user_info
+        WHERE user.id=user_info.user_id AND user.account like concat('%',#{account},'%')
+    </select>
+
+    <select id="findById" resultType="java.lang.Integer">
+        SELECT count(*) FROM sw.sw_user WHERE id=#{id}
+    </select>
+
+    <update id="disable" >
+        UPDATE user set status=#{status} WHERE id=#{id}
+    </update>
+    <update id="UserListUpDataById" >
+        UPDATE user set account=#{account},power=#{poweid} WHERE id=#{id}
+    </update>
+
+    <update id="UpdatePower" >
+        UPDATE sw.sw_user set poweid=#{power} WHERE id=#{id}
+    </update>
+
+    <update id="UpdatePassword" >
+        UPDATE user set password=#{password} WHERE id=#{id}
+    </update>
+
+    <select id="findUUid" resultType="string">
+        SELECT uuid FROM user WHERE id=#{id}
+    </select>
+
+<!--    <delete id="deleteBookById" parameterType="int">-->
+<!--        DELETE FROM book WHERE id=#{id}-->
+<!--    </delete>-->
+<!--    <update id="updateBookById" parameterType="com.example.testspringboot.Book">-->
+<!--        UPDATE book set name=# { name }, author=# {author} WHERE id=#{id}-->
+<!--    </update>-->
+<!--    <select id="getBookById" parameterType="int" resultType="com.example.testspringboot.Book">-->
+<!--        SELECT * FROM book WHERE id=#{id}-->
+<!--    </select>-->
+<!--    <select id="getAllBooks" resultType="com.example.testspringboot.Book">-->
+<!--        SELECT * FROM book-->
+<!--    </select>-->
+</mapper>
