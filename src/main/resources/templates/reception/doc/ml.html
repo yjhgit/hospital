@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
     <head>
         <meta charset="UTF-8">
@@ -77,7 +77,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Header Start -->
         <header class="header">
             <nav class="">
@@ -119,7 +119,8 @@
                         <a href="#">看诊服务</a>
                         <ul class="dropdown-menu">
                             <li><a href="/reception/chat">线上问诊</a></li>
-                            <li onclick="reys()"><a >预约面诊</a></li>
+                            <li><a href="/departments/findAll">预约面诊</a></li>
+                            <li><a href="/reception/bookingExpert">特邀专家预约</a></li>
                         </ul>
                     </li>
                     <li><a href="/reception/toForum">中医健康科普</a></li>
@@ -176,169 +177,23 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-4 col-sm-6">
-                        <div class="department-block text-left">
+                    <div class="col-md-4 col-sm-6" th:each="user : ${expert}">
+                        <div class="department-block text-left" >
                             <div class="bg">
-                                <img src="/docByq/img/doctor/1.jpg" alt="">
+                                <img th:src="${user.img}" alt="">
                             </div>
                             <div class="item-block-03 text-left">
                                 <div class="item-content">
                                     <div class="right-side">
-                                        <h5><a href="#">张震</a></h5>
+                                        <h5><a href="#" th:text="${user.username}"></a></h5>
                                     </div>
-                                    <p>
-                                        特邀会诊专家、国医大师、全国名老中医、云南省荣誉名中医、圣爱中医馆高级顾问、 云南省中医中药研究院资深研究员.
-                                        专家擅长：疑难杂症 内科、妇科、儿科、五官科和皮肤科等疑难杂症，尤其对老年病、心脑血管、呼吸系统、等疾病。
+                                    <p th:text="${user.introduce}">
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="department-block text-left">
-                            <div class="bg">
-                                <img src="/docByq/img/doctor/3.jpg" alt="">
-                            </div>
-                            <div class="item-block-03 text-left">
-                                <div class="item-content">
-                                    <div class="right-side">
-                                        <h5><a href="#">杨荣辉</a></h5>
-                                    </div>
-                                    <p>
-                                        副教授、云南省名中医、李氏中医学术流派传人。专家擅长：胃肠病、肝病、肾病 消化系统疾病：慢性胃炎、十二指肠胃炎、
-                                        胆囊炎、乙肝、肝硬化（腹水）、腹泻、便秘、结肠炎； 泌尿系统疾病：肾炎、尿路感染、肾结石、睾丸炎、附睾炎。
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="department-block text-left">
-                            <div class="bg">
-                                <img src="/docByq/img/doctor/9.jpg" alt="">
-                            </div>
-                            <div class="item-block-03 text-left">
-                                <div class="item-content">
-                                    <div class="right-side">
-                                        <h5><a href="#">李庆生</a></h5>
-                                    </div>
-                                    <p>
-                                        二级教授、云南省名中医、博士研究生导师、加拿大多伦多大学访问学者、国家中医药管理局及省级重点学科学术带头人。
-                                        专家擅长：擅长诊治中医内、妇、儿、皮肤科及杂病的疑难病证，过敏性疾病，如：过敏性皮炎、湿疹、荨麻疹。
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="department-block text-left">
-                            <div class="bg">
-                                <img src="/docByq/img/doctor/6.jpg" alt="">
-                            </div>
-                            <div class="item-block-03 text-left">
-                                <div class="item-content">
-                                    <div class="right-side">
-                                        <h5><a href="#">张良英</a></h5>
-                                    </div>
-                                    <p>
-                                        全国名中医、主任医师、全国名老中医药专家、学术经验继承工作指导老师,专家擅长：不孕症、孕期保胎、月经不调
-                                        妇科疾病：痛经、闭经、崩漏、妇科炎症、更年期综合征、妇科疑难杂症、孕前调理、产后调理、乳腺疾病。
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="department-block text-left">
-                            <div class="bg">
-                                <img src="/docByq/img/doctor/4.jpg" alt="">
-                            </div>
-                            <div class="item-block-03 text-left">
-                                <div class="item-content">
-                                    <div class="right-side">
-                                        <h5><a href="#">管遵惠</a></h5>
-                                    </div>
-                                    <p>
-                                        特邀会诊专家、主任医师、全国老中医药专家学术经验继承工作指导老师、云南省名中医、管氏针灸学术流派第四代传人。
-                                        专家擅长：小儿脑瘫、面瘫。治疗各种常见病、如骨关节疼痛、腰椎间盘突出、腰肌劳损症等。
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="department-block text-left">
-                            <div class="bg">
-                                <img src="/docByq/img/doctor/8.jpg" alt="">
-                            </div>
-                            <div class="item-block-03 text-left">
-                                <div class="item-content">
-                                    <div class="right-side">
-                                        <h5><a href="#">吴荣祖</a></h5>
-                                    </div>
-                                    <p>
-                                        全国名中医、主任医师、吴佩衡扶阳学术流派第二代传人、云南省国医名师、云南省名中医、昆明市荣誉名中医、博士生导师、
-                                        全国老中医药专家学术经验继承工作指导老师。专家擅长：内科、妇科、儿科、疑难杂症。
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="department-block text-left">
-                            <div class="bg">
-                                <img src="/docByq/img/doctor/2.jpg" alt="">
-                            </div>
-                            <div class="item-block-03 text-left">
-                                <div class="item-content">
-                                    <div class="right-side">
-                                        <h5><a href="#">戴天浩</a></h5>
-                                    </div>
-                                    <p>
-                                        特邀会诊专家、副主任医师、云南省名中医、戴氏中医学术流派传人。专家擅长：肾病、发热、咳嗽。儿科、内科疾病：
-                                        感冒、扁桃体炎、肺炎、腹泻便秘、肾炎、小儿遗尿、湿疹、急慢性肾炎、肾病综合症、肾盂肾炎、急慢性咽炎、肺炎、高血压、冠心病。
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="department-block text-left">
-                            <div class="bg">
-                                <img src="/docByq/img/doctor/7.jpg" alt="">
-                            </div>
-                            <div class="item-block-03 text-left">
-                                <div class="item-content">
-                                    <div class="right-side">
-                                        <h5><a href="#">姚克敏</a></h5>
-                                    </div>
-                                    <p>
-                                        全国首批老中医药专家学术经验继承工作指导老师、云南省国医名师、姚氏中医学术流派第六代传人。专家擅长：
-                                        妇科不孕症、 多囊卵巢综合征、习惯性流产、各类疑难杂症疾病、妇科不孕症、经、带、孕、胎、乳有独特的诊疗经验。
-                                    </p>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="department-block text-left">
-                            <div class="bg">
-                                <img src="/docByq/img/doctor/5.jpg" alt="">
-                            </div>
-                            <div class="item-block-03 text-left">
-                                <div class="item-content">
-                                    <div class="right-side">
-                                        <h5><a href="#">成诗黔</a></h5>
-                                    </div>
-                                    <p>
-                                        特邀会诊专家、全军突出贡献中医专家、原昆明解放军总医院副院长、中医科主任、药理基地主任、主任医师、教授。
-                                        专家擅长：癫痫、妇科疑难杂症、子宫内膜异位症、男女不孕不育症、产后康复调理、顽固性哮喘、消化、泌尿及脑血管等系统相关疾病。
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                </div>
             </div>
         </section>
 
@@ -353,7 +208,7 @@
                         <div class="footer-content d-md-flex justify-content-between align-items-center text-center">
                             <p>Copyright © 2023 <a href="#">nnnu.com</a> 最终解释权属于yyc
                             </p>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -415,6 +270,11 @@
                         , id: 101
                         ,href: '/reception//toMyReserve?id='+res.data.id //开启超链接
                         //,target: '_blank' //新窗口方式打开
+                    }, {
+                        title: '退出'
+                        , id: 101
+                        ,href: '/login/loginOut' //开启超链接
+                        //,target: '_blank' //新窗口方式打开
                     }
                     ]
                     , id: 'demo1'
@@ -426,7 +286,7 @@
                             // layer.msg('修改密码');
                         }
                         if (obj.title == '个人信息') {
-                            xadmin.open('修改密码', '/reception/toUserInfo', '580', '600', false);
+                            xadmin.open('个人信息', '/reception/toUserInfo', '580', '600', false);
                             // layer.msg('个人信息');
                         }
 

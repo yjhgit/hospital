@@ -122,7 +122,8 @@
                 <a href="#">看诊服务</a>
                 <ul class="dropdown-menu">
                     <li><a href="/reception/chat">线上问诊</a></li>
-                    <li onclick="reys()"><a >预约面诊</a></li>
+                    <li><a href="/departments/findAll">预约面诊</a></li>
+                    <li><a href="/reception/bookingExpert">特邀专家预约</a></li>
                 </ul>
             </li>
             <li class="yyc"><a href="/reception/toForum">中医健康科普</a></li>
@@ -277,6 +278,11 @@
                         , id: 101
                         ,href: '/reception//toMyReserve?id='+res.data.id //开启超链接
                         //,target: '_blank' //新窗口方式打开
+                    }, {
+                        title: '退出'
+                        , id: 101
+                        ,href: '/login/loginOut' //开启超链接
+                        //,target: '_blank' //新窗口方式打开
                     }
                     ]
                     , id: 'demo1'
@@ -288,7 +294,7 @@
                             // layer.msg('修改密码');
                         }
                         if (obj.title == '个人信息') {
-                            xadmin.open('修改密码', '/reception/toUserInfo', '580', '600', false);
+                            xadmin.open('个人信息', '/reception/toUserInfo', '580', '600', false);
                             // layer.msg('个人信息');
                         }
 

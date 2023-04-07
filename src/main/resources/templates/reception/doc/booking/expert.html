@@ -176,12 +176,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-3" th:each="user : ${expert}">
-
-                    <div class="col-md-4 col-sm-6">
+                <div class="row mt-3">
+                    <div class="col-md-4 col-sm-6"  th:each="user : ${expert}">
                         <div class="department-block text-left" th:onclick="|querySchedule(${user.userId})|" >
                             <div class="bg">
-                                <img src="/docByq/img/doctor/1.jpg" alt="">
+                                <img th:src="${user.img}" alt="">
                             </div>
                             <div class="item-block-03 text-left">
                                 <div class="item-content">
@@ -271,6 +270,11 @@
                         , id: 101
                         ,href: '/reception//toMyReserve?id='+res.data.id //开启超链接
                         //,target: '_blank' //新窗口方式打开
+                    }, {
+                        title: '退出'
+                        , id: 101
+                        ,href: '/login/loginOut' //开启超链接
+                        //,target: '_blank' //新窗口方式打开
                     }
                     ]
                     , id: 'demo1'
@@ -282,7 +286,7 @@
                             // layer.msg('修改密码');
                         }
                         if (obj.title == '个人信息') {
-                            xadmin.open('修改密码', '/reception/toUserInfo', '580', '600', false);
+                            xadmin.open('个人信息', '/reception/toUserInfo', '580', '600', false);
                             // layer.msg('个人信息');
                         }
 
@@ -293,7 +297,6 @@
         }
 
     })
-
     function reyc() {
         var id = $("#id").val();
         if (id==''||id==null){

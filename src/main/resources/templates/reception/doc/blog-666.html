@@ -98,40 +98,40 @@
                     <a href="/login/user" class="btn btn-secondary" id="demo1">
                         <i class="fas fa-lock"></i><span id="username">登录</span>
                     </a>
+
                 </div>
-                <!-- Mobile -->
                 <ul class="menu">
-                    <li ><a href="./home.html">网站首页</a></li>
-                    <!-- <li><a href="./about.html">About</a></li> -->
+                    <li class="active"><a href="/">网站首页</a></li>
                     <li class="dropdown">
                         <a href="#">重点专科</a>
                         <ul class="dropdown-menu">
                             <li class="dropdown">
                                 <a href="#">专家团队</a>
                                 <ul class="dropdown-menu left-auto">
-                                    <li><a href="./department-01.html">团队查看</a></li>
-                                    <li><a href="./department-02.html">科室分类</a> </li>
-                                    <li><a href="./department-03.html">专家名录</a> </li>
+                                    <li><a href="/reception/Department">科室分类</a></li>
+                                    <li><a href="/reception/expert">专家名录</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
                                 <a href="#">中药专区</a>
                                 <ul class="dropdown-menu left-auto">
-                                    <li><a href="./doctor-01.html">道地药材</a></li>
-                                    <li><a href="./doctor-02.html">煎药预约</a></li>
+                                    <li><a href="/reception/toDrugs">道地药材</a></li>
+                                    <li onclick="reyc()"><a >煎药预约</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </li>
-					<li class="dropdown">
-					    <a href="#">看诊服务</a>
-					    <ul class="dropdown-menu">
-					        <li><a href="./department-01.html">线上问诊</a></li>
-					        <li><a href="./service-02.html">预约面诊</a></li>
-					    </ul>
-					</li>
+                    <li class="dropdown ">
+                        <a href="#">看诊服务</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/reception/chat">线上问诊</a></li>
+                            <li><a href="/departments/findAll">预约面诊</a></li>
+                            <li><a href="/reception/bookingExpert">特邀专家预约</a></li>
+                        </ul>
+                    </li>
                     <li class="yyc"><a href="/reception/toForum">中医健康科普</a></li>
-					<li><a href="./about.html">关于我们</a></li>
+                    <li><a href="/reception/about">关于我们</a></li>
+
                 </ul>
 
             </nav>
@@ -240,43 +240,60 @@
     userInfo(function (res) {
         console.log("失败")
         console.log(res)
-        if (res.code==500){
+        if (res.code == 500) {
 
-        }else {
-            $("#username").text(res.data.userInfo.username)
+        } else {
+            $("#username").text(res.data.userInfo.username);
+            $("#id").val(res.data.id);
             $("#dome1").append("<i class=\"layui-icon layui-icon-down layui-font-12\"></i>");
-            layui.use('dropdown', function(){
+            layui.use('dropdown', function () {
                 var dropdown = layui.dropdown
                 dropdown.render({
                     elem: '#demo1' //可绑定在任意元素中，此处以上述按钮为例
-                    ,data: [{
+                    , data: [{
                         title: '修改密码'
-                        ,id: 100
+                        , id: 100
                         //,href: '#'
-                    },{
+                    }, {
                         title: '个人信息'
-                        ,id: 101
+                        , id: 101
                         //,href: 'https://www.layui.com/' //开启超链接
                         //,target: '_blank' //新窗口方式打开
-                    },{
+                    }, {
                         title: '我的收藏'
-                        ,id: 101
-                        ,href: '/' //开启超链接
+                        , id: 101
+                        , href: '/reception/toForumByMy?id=' + res.data.id //开启超链接
+                        //,target: '_blank' //新窗口方式打开
+                    }, {
+                        title: '我的留言'
+                        , id: 101
+                        , href: '/reception/toMyProposal?id=' + res.data.id //开启超链接
+                        //,target: '_blank' //新窗口方式打开
+                    }, {
+                        title: '我的预约'
+                        , id: 101
+                        ,href: '/reception//toMyReserve?id='+res.data.id //开启超链接
+                        //,target: '_blank' //新窗口方式打开
+                    }, {
+                        title: '退出'
+                        , id: 101
+                        ,href: '/login/loginOut' //开启超链接
                         //,target: '_blank' //新窗口方式打开
                     }
                     ]
-                    ,id: 'demo1'
+                    , id: 'demo1'
                     //菜单被点击的事件
-                    ,click: function(obj){
+                    , click: function (obj) {
                         console.log(obj);
-                        if (obj.title=='修改密码'){
-                            xadmin.open('修改密码','/reception/toPassword','580','600',false);
+                        if (obj.title == '修改密码') {
+                            xadmin.open('修改密码', '/reception/toPassword', '580', '600', false);
                             // layer.msg('修改密码');
                         }
-                        if (obj.title=='个人信息'){
-                            xadmin.open('修改密码','/reception/toUserInfo','580','600',false);
+                        if (obj.title == '个人信息') {
+                            xadmin.open('个人信息', '/reception/toUserInfo', '580', '600', false);
                             // layer.msg('个人信息');
                         }
+
 
                     }
                 });
@@ -284,7 +301,6 @@
         }
 
     })
-
     function uncollect(id) {
         $.ajax({
             type: 'get',

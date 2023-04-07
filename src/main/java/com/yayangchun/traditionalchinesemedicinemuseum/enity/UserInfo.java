@@ -32,6 +32,8 @@ public class UserInfo {
 
     private String introduce;
 
+    private String img;
+
     private Integer userId;
 
 

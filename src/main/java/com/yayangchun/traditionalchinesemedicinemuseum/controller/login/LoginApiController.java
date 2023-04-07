@@ -158,11 +158,11 @@ public class LoginApiController extends BaseController {
     public String loginOut(HttpSession session){
         LoginUserVo loginInfo = SecurityUnit.getLoginInfo();
         if (loginInfo == null){
-            return "/login/do";
+            return "/login/login";
         }
         Integer poweid = loginInfo.getPower();
         session.removeAttribute("userId");
-        if (poweid==1){
+        if (poweid==0){
             return "/admin/login";
         }
         return "/login/login";
