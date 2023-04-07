@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Article)表服务实现类
@@ -61,7 +62,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     }
 
     @Override
-    public List<Integer> seleByacid(String userid) {
+    public List<Map<String,Integer>> seleByacid(String userid) {
         return articleMapper.seleByacid(userid);
     }
 

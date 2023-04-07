@@ -35,6 +35,8 @@
         <link rel="stylesheet" href="/docByq/scss/style.css">
         <link rel="stylesheet" href="/docByq/css/responsive.css">
         <script src="/js/HttpUtil.js"></script>
+        <link rel="stylesheet" href="/doc/lib/layui-v2.6.3/css/layui.css">
+        <script src="/doc/lib/layui-v2.6.3/layui.js"></script>
 
     </head>
 
@@ -94,7 +96,7 @@
                <!-- Mobile -->
                <ul class="menu">
        			<li class="active"><a href="./home.html">网站首页</a></li>
-                  
+
                    <li class="dropdown">
                        <a href="#">重点专科</a>
                        <ul class="dropdown-menu">
@@ -126,7 +128,7 @@
        			<li><a href="about.html">关于我们</a></li>
 
                </ul>
-       
+
            </nav>
        </header>
 
@@ -181,24 +183,25 @@
                         <div class="item-block-03">
                             <div class="item-content">
                                 <div class="">
-                                    
+
                                     <h5><a href="#" th:text="${i.subject}"></a></h5>
                                 </div>
                                 <p style="text-indent : 20px;"  th:text="${i.message}">
 
                                 </p>
-                                <!-- <div class="item-btn">
-                                    <a href="#" class="btn btn-secondary">read more</a>
-                                </div> -->
+                                 <div class="item-btn">
+                                    <a href="#"  class="btn btn-secondary"  th:onclick="|deleteMsg(${i.id})|">删除留言</a>
+                                </div>
                             </div>
                         </div>
                     </div>
+            </div>
             </div>
         </section>
 
         <!-- DEPARTMENT SECTION END -->
 
-    
+
 
         <!-- CONTACT SECTION END -->
 
@@ -210,7 +213,7 @@
                         <div class="footer-content d-md-flex justify-content-between align-items-center text-center">
                             <p>Copyright © 2023 <a href="#">nnnu.com</a> 最终解释权属于yyc
                             </p>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -232,5 +235,25 @@
 
 
     </body>
-
+<script>
+    function deleteMsg(id) {
+        $.ajax({
+            type: 'get',
+            url: '/receptionApi/deleteMsg?id='+id,
+            success: function (res) {
+                layer.msg(res.data)
+                userInfo(function (res){
+                    if(res.data.id == undefined || res.data.id == ""){
+                        location.href = "/login/user";
+                    }else {
+                        location.href = "/reception/toMyProposal?id="+res.data.id;
+                    }
+                })
+            },
+            error: function (res) {
+                layer.msg("删除失败")
+            }
+        })
+    }
+</script>
 </html>

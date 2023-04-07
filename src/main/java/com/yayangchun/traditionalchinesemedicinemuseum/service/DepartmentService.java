@@ -25,5 +25,7 @@ public interface DepartmentService extends IService<Department> {
     void addDepartment(Department department);
 
     public List<String> qeurySymptomAll();
+
+    List<Department> queryDoctorDepartment();
 }
 

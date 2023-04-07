@@ -16,8 +16,8 @@
         select count(*) from collect where user_id=#{userid} AND article_id=#{acid}
     </select>
 
-    <select id="seleByacid" resultType="integer">
-        select article_id from collect where user_id=#{userid}
+    <select id="seleByacid" resultType="map">
+        select id,article_id from collect where user_id=#{userid}
     </select>
 
 <!--    <delete id="deleteBookById" parameterType="int">-->

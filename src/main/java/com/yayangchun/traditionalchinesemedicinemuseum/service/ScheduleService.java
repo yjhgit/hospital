@@ -19,6 +19,8 @@ public interface ScheduleService extends IService<Schedule> {
 
     void updateSchedule(Schedule scheduleResult);
 
+    void updateScheduleByDoctorId(Schedule scheduleResult);
+
     void insert(Schedule scheduleResult);
 }
 

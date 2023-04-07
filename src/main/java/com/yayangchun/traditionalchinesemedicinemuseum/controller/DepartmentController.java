@@ -63,11 +63,18 @@ public class DepartmentController extends BaseController {
     }
 
     @RequestMapping("/findAllData")
-    @ApiOperation("跳转科室管理页面")
+    @ApiOperation("查询科室数据")
     @ResponseBody
     public JSONObject findAllData(DepartmentVo departmentVo){
         Page<Department> allData = departmentService.findAllData(departmentVo);
         return CommonResult.successPage(allData.getRecords(),allData.getTotal());
+    }
+
+    @RequestMapping("/queryDoctorDepartment")
+    @ApiOperation("查询医生科室数据")
+    @ResponseBody
+    public List<Department> queryDoctorDepartment(){
+        return departmentService.queryDoctorDepartment();
     }
 
     @RequestMapping("/addDepartment")

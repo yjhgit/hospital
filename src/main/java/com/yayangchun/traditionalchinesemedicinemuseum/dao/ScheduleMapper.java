@@ -3,6 +3,7 @@ package com.yayangchun.traditionalchinesemedicinemuseum.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.Schedule;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Update;
 
 
 /**
@@ -14,6 +15,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ScheduleMapper extends BaseMapper<Schedule> {
 
-
+    @Update("update schedule set signal_source = #{signalSource} where doctor_id = #{doctorId}")
+    void updateScheduleByDoctorId(Schedule scheduleResult);
 }
 

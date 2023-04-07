@@ -5,6 +5,8 @@ import com.yayangchun.traditionalchinesemedicinemuseum.enity.*;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.vo.ArticleVo;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.vo.DrugsVo;
 import com.yayangchun.traditionalchinesemedicinemuseum.service.*;
+import com.yayangchun.traditionalchinesemedicinemuseum.unit.StringUtils;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 作者：崖洋春
@@ -89,29 +93,38 @@ public class ReceptionController {
     @RequestMapping("/toForumByMy")
     public String toForumByMy(Model model,String id){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        List<Integer> integers = articleService.seleByacid(id);
-        List<Article> all = articleService.lambdaQuery().in(Article::getId,integers).list();
+        List<Map<String,Integer>> list = articleService.seleByacid(id);
         List<ArticleVo> articleVos = new ArrayList<>();
-        all.forEach(v->{
-            ArticleVo articleVo = new ArticleVo();
-            articleVo.setArticleTitle(v.getArticleTitle());
-            articleVo.setArticleAuthor(v.getArticleAuthor());
-            if (v.getArticleText().length()>100){
-                articleVo.setArticleText(v.getArticleText().substring(0,100));
-            }else {
-                articleVo.setArticleText(v.getArticleText());
-            }
-            articleVo.setAddTimeVo(simpleDateFormat.format(v.getAddTime()));
-            articleVo.setUpdateTimeVo(simpleDateFormat.format(v.getUpdateTime()));
-            if (v.getArticleImg()==null){
-                articleVo.setArticleImg("#");
-            }else {
-                articleVo.setArticleImg(v.getArticleImg());
-            }
-            articleVo.setHref("/reception/toForumInfo?id="+v.getId());
-            articleVos.add(articleVo);
-
-        });
+        List<Integer> integers = list.stream().map(map->{
+            return map.get("article_id");
+        }).collect(Collectors.toList());
+        if(StringUtils.isNotEmpty(integers)){
+            List<Article> all = articleService.lambdaQuery().in(Article::getId,integers).list();
+            all.forEach(v->{
+                ArticleVo articleVo = new ArticleVo();
+                articleVo.setArticleTitle(v.getArticleTitle());
+                articleVo.setArticleAuthor(v.getArticleAuthor());
+                if (v.getArticleText().length()>100){
+                    articleVo.setArticleText(v.getArticleText().substring(0,100));
+                }else {
+                    articleVo.setArticleText(v.getArticleText());
+                }
+                articleVo.setAddTimeVo(simpleDateFormat.format(v.getAddTime()));
+                articleVo.setUpdateTimeVo(simpleDateFormat.format(v.getUpdateTime()));
+                if (v.getArticleImg()==null){
+                    articleVo.setArticleImg("#");
+                }else {
+                    articleVo.setArticleImg(v.getArticleImg());
+                }
+                articleVo.setHref("/reception/toForumInfo?id="+v.getId());
+                list.forEach(li->{
+                    if(v.getId().equals(li.get("article_id"))){
+                        articleVo.setId(li.get("id"));
+                    }
+                });
+                articleVos.add(articleVo);
+            });
+        }
         model.addAttribute("list",articleVos);
         return "/reception/doc/blog-666";
     }

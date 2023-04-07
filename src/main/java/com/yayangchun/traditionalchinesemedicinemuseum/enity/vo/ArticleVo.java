@@ -12,6 +12,8 @@ import java.util.Date;
 @Data
 public class ArticleVo extends Article {
 
+    private Integer id;
+
     private String href;
 
     private String addTimeVo;

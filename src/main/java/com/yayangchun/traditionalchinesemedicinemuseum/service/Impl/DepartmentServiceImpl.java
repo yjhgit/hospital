@@ -78,5 +78,22 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
     public List<String> qeurySymptomAll() {
         return departmentMapper.querySymptomAll();
     }
+
+    @Override
+    public List<Department> queryDoctorDepartment() {
+        // 查询科室数据
+        List<Department> departmentAll = findAll();
+        List<Department> departmentList = new ArrayList<>();
+        departmentAll.forEach(dep->{
+            if(StringUtils.isEmpty(dep.getSonList())){
+                departmentList.add(dep);
+            }else {
+                dep.getSonList().forEach(son->{
+                    departmentList.add(son);
+                });
+            }
+        });
+        return departmentList;
+    }
 }
 

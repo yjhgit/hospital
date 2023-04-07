@@ -1,14 +1,18 @@
 package com.yayangchun.traditionalchinesemedicinemuseum.controller.doctor;
 
+import com.yayangchun.traditionalchinesemedicinemuseum.controller.ScheduleController;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.ReservationDot;
+import com.yayangchun.traditionalchinesemedicinemuseum.enity.Schedule;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.User;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.UserInfo;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.vo.UserListVo;
 import com.yayangchun.traditionalchinesemedicinemuseum.service.ReservationDotService;
+import com.yayangchun.traditionalchinesemedicinemuseum.service.ScheduleService;
 import com.yayangchun.traditionalchinesemedicinemuseum.service.UserInfoService;
 import com.yayangchun.traditionalchinesemedicinemuseum.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,6 +38,11 @@ public class DoctorApiController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ScheduleService scheduleService;
+
+
     /**
      * 查看医生的预约
      * @param name
@@ -85,8 +94,15 @@ public class DoctorApiController {
 
     @ApiOperation("修改医生排期配置")
     @RequestMapping("/updateConfig")
+    @Transactional
     public Map<String,Object> updateConfig(User user){
         boolean b = userService.updateById(user);
+        Schedule schedule = new Schedule();
+        schedule.setDoctorId(user.getId());
+        schedule.setSignalSource(user.getSignalSource());
+        // 修改号源 注意此处号源直接覆盖排期表的号源，如果已预约再取消返还号源的时候号源可能会超出设置的号源
+        // 建议预约前设置好不再更改
+        scheduleService.updateSchedule(schedule);
         Map<String,Object> map = new HashMap<>();
         map.put("code",0);
         map.put("msg","");

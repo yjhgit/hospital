@@ -122,6 +122,11 @@ public class ScheduleServiceImpl extends ServiceImpl<ScheduleMapper, Schedule> i
     }
 
     @Override
+    public void updateScheduleByDoctorId(Schedule scheduleResult) {
+        scheduleMapper.updateScheduleByDoctorId(scheduleResult);
+    }
+
+    @Override
     public void insert(Schedule scheduleResult) {
         scheduleMapper.insert(scheduleResult);
     }

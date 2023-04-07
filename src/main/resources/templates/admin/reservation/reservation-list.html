@@ -83,9 +83,13 @@
                     , {field: 'reservationName', title: '预约医生'}
                     , {field: 'symptom', title: '症状'}
                     , {field: 'reservationTime', title: '预约时间'}
+                    , {field: 'timePeriod', title: '预约时段'}
                     , {field: 'reservationAge', title: '年龄'}
                     , {field: 'reservationPhone', title: '患者电话'}
                     , {field: 'name', title: '患者名'}
+                    ,{field:'state',title:"状态", width:100,templet: function(d){
+                        return d.state==1?"已预约":d.state==2?"已完成":"已取消"
+                    }}
                     // , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 140}
                 ]
             ]

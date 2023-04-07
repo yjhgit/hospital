@@ -99,7 +99,14 @@
                             <input type="number" name="signalSource" id="signalSource"  class="layui-input">
                         </div>
                     </div>
-
+                    <div class="layui-form-item" id="depDiv">
+                        <label class="layui-form-label">医生所属科室</label>
+                        <div class="layui-input-block">
+                            <select lay-ignore id="department" name="department" style="width:100%;height:30px">
+                                <option value="">请选择科室</option>
+                            </select>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -114,6 +121,7 @@
     var tableIns;
     layui.use(['laydate', 'table', 'form'], function () {
         var table = layui.table;
+        queryDepartment();
         tableIns = table.render({
             elem: '#user'
             , url: "/docApi/doctorList"
@@ -183,7 +191,12 @@
                 }
                 $("#signalSource").val(data1.signalSource);
                 layui.form.render();
-                $('#myModal').modal('show')
+                if(data1.power != 2){
+                    $("#depDiv").hide()
+                }else {
+                    $("#depDiv").show()
+                }
+                $('#myModal').modal('show');
             }else if (obj.event === 'query') {
                 layer.open({
                     type: 2,
@@ -215,10 +228,9 @@
             str += $("input[type='checkbox']:checked")[i].title + ',';
         }
         str = str.substring(0, str.length - 1);//截去末尾的逗号
-        $("#workingDate").val();
         $.ajax({
             type:"GET",
-            url:"/docApi/updateConfig?id="+ $("#doctorId").val()+"&workingDate="+str+"&signalSource="+$("#signalSource").val(),
+            url:"/docApi/updateConfig?id="+ $("#doctorId").val()+"&workingDate="+str+"&signalSource="+$("#signalSource").val()+"&departmentId="+$("#department").val(),
             async:false,
             processData:false,
             contentType: "application/json",
@@ -229,6 +241,24 @@
                     search();
                 }else {
                     layer.msg("修改失败");
+                }
+            }
+        });
+    }
+
+    function queryDepartment() {
+        $.ajax({
+            type:"get",
+            url:"/departments/queryDoctorDepartment",
+            async:false,
+            processData:false,
+            contentType: "application/json",
+            success:function(res){
+                if(res != undefined && res != ""){
+                    var optArr = [];
+                    for (var i = 0; i < res.length; i++) {
+                        $('#department').append("<option value=" + res[i].id + ">" + res[i].departmentName + "</option>");
+                    }
                 }
             }
         });

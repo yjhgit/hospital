@@ -1,5 +1,6 @@
 package com.yayangchun.traditionalchinesemedicinemuseum.controller.reception;
 
+import com.yayangchun.traditionalchinesemedicinemuseum.dao.ArticleMapper;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.Propose;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.ReservationDot;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.ReservationYc;
@@ -10,6 +11,7 @@ import com.yayangchun.traditionalchinesemedicinemuseum.service.*;
 import com.yayangchun.traditionalchinesemedicinemuseum.unit.ResultUtil;
 import com.yayangchun.traditionalchinesemedicinemuseum.unit.SecurityUnit;
 import com.yayangchun.traditionalchinesemedicinemuseum.unit.StringUtils;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +40,9 @@ public class ReceptionApiController {
 
     @Autowired
     ReservationDotService reservationDotService;
+
+    @Autowired
+    ArticleMapper articleMapper;
 
     @RequestMapping("/upDataByUserInfo")
     @ResponseBody
@@ -71,6 +76,17 @@ public class ReceptionApiController {
     }
 
     /**
+     * @description: 取消收藏
+     * @date 2023/4/7
+     */
+    @RequestMapping("/deleteCollect")
+    @ResponseBody
+    public ResultUtil deleteCollect(Integer id){
+        articleMapper.delCollection(id);
+        return ResultUtil.success("取消收藏成功");
+    }
+
+    /**
      * 留言
      * @param propose
      * @return
@@ -84,6 +100,17 @@ public class ReceptionApiController {
         }
 
         return ResultUtil.success("添加成功");
+    }
+
+    /**
+     * 删除留言
+     * @return
+     */
+    @RequestMapping("/deleteMsg")
+    @ResponseBody
+    public ResultUtil deleteMsg(Integer id){
+        proposeService.removeById(id);
+        return ResultUtil.success("删除成功");
     }
 
     /**

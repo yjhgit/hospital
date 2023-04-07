@@ -5,6 +5,7 @@ import com.yayangchun.traditionalchinesemedicinemuseum.enity.Article;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Article)表服务接口
@@ -31,7 +32,7 @@ public interface ArticleService extends IService<Article> {
 
     public Integer selecollection(String userid, String acid);
 
-    public List<Integer> seleByacid( String userid);
+    public List<Map<String,Integer>> seleByacid(String userid);
 
 }
 
