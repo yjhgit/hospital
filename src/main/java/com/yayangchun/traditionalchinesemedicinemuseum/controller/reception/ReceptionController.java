@@ -37,6 +37,9 @@ public class ReceptionController {
     @Autowired
     ReservationDotService reservationDotService;
 
+    @Autowired
+    UserInfoService userInfoService;
+
     @RequestMapping("/toIndex")
     public String toIndex(){return "/reception/doc/home";}
 
@@ -138,9 +141,19 @@ public class ReceptionController {
      * 专家名录
      */
     @RequestMapping("/expert")
-    public String expert(){
+    public String expert(Model model){
+        List<UserInfo> all = userInfoService.findAllByRole();
+        model.addAttribute("expert",all);
         return "/reception/doc/ml";
     }
+
+    @RequestMapping("/bookingExpert")
+    public String bookingExpert(Model model){
+        List<UserInfo> all = userInfoService.findAllByRole();
+        model.addAttribute("expert",all);
+        return "/reception/doc/booking/expert";
+    }
+
 
     @RequestMapping("/Department")
     public String Department(){

@@ -30,4 +30,14 @@ public class DoctorController {
     public String reservationList(){
         return "/doctor/yy/reservation-list";
     }
+
+    @RequestMapping("/toDoctorList")
+    public String toDoctorList(){
+        return "/admin/user/doctor-list";
+    }
+
+    @RequestMapping("/toDoctorSchedule")
+    public String toDoctorSchedule(){
+        return "/admin/user/schedule";
+    }
 }

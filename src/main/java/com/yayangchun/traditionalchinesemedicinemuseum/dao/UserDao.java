@@ -4,6 +4,7 @@ package com.yayangchun.traditionalchinesemedicinemuseum.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.User;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.vo.UserListVo;
+import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,6 +21,8 @@ public interface UserDao extends BaseMapper<User> {
 
 
     public List<UserListVo> findAllByName(@Param("account") String account);
+
+    public List<User> findDoctor(@Param("account") String account,@Param("power") Integer power);
 
     public Integer disable(@Param("id") Integer id,@Param("status") String status);
 

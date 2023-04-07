@@ -74,5 +74,15 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoDao, UserInfo> impl
     public Integer UpdateUserInfoById(UserInfo userInfo) {
         return userInfoDao.updateById(userInfo);
     }
+
+    @Override
+    public List<UserInfo> queryUserInfoByDepId(Integer depId) {
+        return userInfoDao.queryUserInfoByDepId(depId);
+    }
+
+    @Override
+    public List<UserInfo> findAllByRole() {
+        return userInfoDao.findAllByRole(3);
+    }
 }
 

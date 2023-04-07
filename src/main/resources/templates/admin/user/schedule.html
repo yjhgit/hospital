@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" href="/schedule/lib/main.css">
+    <script src="/docByq/js/jquery-3.3.1.min.js"></script>
+    <script src="/adminre/lib/layui/layui.js" charset="utf-8"></script>
+    <script src="/schedule/lib/main.js"></script>
+    <style>
+        .done {
+            text-align:center;
+            font-weight:bold;
+            line-height: 30px;
+            width:100%;
+        }
+        input[name=timePeriod]{
+            width:10%;
+            height:30px;
+            margin-bottom: 30px;
+        }
+        #doctorList span{
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+        <div id='calendar' style="width:600px;height:400px"></div>
+        <div id="timePeriod" style="margin-left:70%;margin-top:-40%"></div>
+</body>
+<script >
+    var map = {};
+    function dealWithData(){
+        var eventsList = [];
+        $.ajax({
+            type:"get",
+            url:"/schedule/querySchedule?userId="+$(window.parent.document).find("#doctorId").val(),
+            async:false,
+            processData:false,
+            contentType: "application/json",
+            success:function(res){
+                if(res != undefined && res != ""){
+                    for (let schedule of res) {
+                        map[schedule.bookingTimeStr]=schedule.timePeriodList;
+                        if(schedule.signalSource != undefined && schedule.signalSource > 0){
+                            eventsList.push({
+                                title: '有号',
+                                textColor: 'green',
+                                color: 'transparent',
+                                className: 'done',
+                                start: schedule.bookingTimeStr,
+                            })
+                        }else {
+                            eventsList.push({
+                                title: '约满',
+                                textColor: 'red',
+                                color: 'transparent',
+                                className: 'done',
+                                start: schedule.bookingTimeStr,
+                            })
+                        }
+                    }
+                }
+            }
+        });
+        return eventsList;
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            defaultDate: '2018-03-12',
+            selectable: true,
+            locale:'zh-cn',
+            // weekends: false, 不显示周六日
+            selectHelper: true,
+            events: dealWithData(),
+            initialView: 'dayGridMonth'
+        });
+        calendar.on('dateClick', function(info) {
+            toTime(info.dateStr);
+        });
+        calendar.render();
+        calendar.batchRendering(function() {
+            calendar.changeView('dayGridMonth');
+            calendar.addEvent({ title: 'new event', start: '2023-09-01' });
+        });
+    });
+
+    function toTime(time) {
+        $("#timeVal").attr("placeholder",time);
+        $("#bookingTime").val(time);
+        let scheduleTime = map[time];
+        $("#timePeriod").html("");
+        if(scheduleTime){
+            var period = "";
+            for (let schedule of scheduleTime) {
+                if(schedule.signalSource != undefined && schedule.signalSource > 0){
+                    period += "<input type=\"radio\" name=\"timePeriod\" value="+schedule.timePeriod+" title=\"\" ><span>"+schedule.timePeriod+" "+"余号："+schedule.signalSource+"</span></br>";
+                }else {
+                    period += "<input type=\"radio\" name=\"timePeriod\" value="+schedule.timePeriod+" title=\"\" disabled><span>"+schedule.timePeriod+" "+"约满</span></br>";
+                }
+            }
+            $("#timePeriod").html(period);
+        }else {
+            layer.msg("当前时段无可用排期");
+        }
+    }
+
+</script>
+</html>

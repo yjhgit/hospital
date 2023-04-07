@@ -7,17 +7,13 @@
         UPDATE user_info set username=#{username} WHERE user_id=#{id}
     </update>
 
+    <select id="queryUserInfoByDepId"
+            resultType="com.yayangchun.traditionalchinesemedicinemuseum.enity.UserInfo">
+            select * from user_info ui,user us where ui.user_id = us.id and us.department_id = #{depId}
+    </select>
+    <select id="findAllByRole" resultType="com.yayangchun.traditionalchinesemedicinemuseum.enity.UserInfo">
+        select * from user_info ui,user us where ui.user_id = us.id and us.power = #{power}
+    </select>
 
-<!--    <delete id="deleteBookById" parameterType="int">-->
-<!--        DELETE FROM book WHERE id=#{id}-->
-<!--    </delete>-->
-<!--    <update id="updateBookById" parameterType="com.example.testspringboot.Book">-->
-<!--        UPDATE book set name=# { name }, author=# {author} WHERE id=#{id}-->
-<!--    </update>-->
-<!--    <select id="getBookById" parameterType="int" resultType="com.example.testspringboot.Book">-->
-<!--        SELECT * FROM book WHERE id=#{id}-->
-<!--    </select>-->
-<!--    <select id="getAllBooks" resultType="com.example.testspringboot.Book">-->
-<!--        SELECT * FROM book-->
-<!--    </select>-->
+
 </mapper>

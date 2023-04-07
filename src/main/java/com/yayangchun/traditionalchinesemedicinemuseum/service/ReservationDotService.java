@@ -21,5 +21,6 @@ public interface ReservationDotService extends IService<ReservationDot> {
 
     public List<ReservationDot> findAllByAdmin(String name);
 
+    void cancel(Integer id);
 }
 

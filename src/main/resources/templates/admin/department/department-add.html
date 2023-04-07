@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>用户表单</title>
+  <link rel="stylesheet" href="/adminre/lib/layui/css/layui.css">
+  <script src="/adminre/lib/layui/layui.js" charset="utf-8"></script>
+</head>
+
+<body >
+
+<form class="layui-form " style="margin:20px 0px 0px 20px;">
+  <input type="hidden" id="imagesUrl"/>
+  <div class="layui-form-item">
+    <label class="layui-form-label">上级科室id</label>
+    <div class="layui-input-inline">
+      <input type="text" name="title" id="pid" lay-verify="required" placeholder="上级科室id" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">科室名称</label>
+    <div class="layui-input-inline">
+      <input type="text" name="title" id="departmentName" lay-verify="required" placeholder="科室名称" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">科室描述</label>
+    <div class="layui-input-block">
+      <textarea name="ac" lay-verify="required" id="departmentDes" placeholder="请输入科室描述" class="layui-textarea"></textarea>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+</form>
+<script>
+  layui.use(['upload', 'element','form','jquery'], function(){
+    var form = layui.form ,
+            upload = layui.upload,
+            element = layui.element,
+            layer = layui.layer,
+            $= layui.jquery;
+
+    //监听表单提交
+    form.on('submit(formDemo)', function(data){
+      var pid = $.trim($("#pid").val());
+      var departmentName = $.trim($("#departmentName").val());
+      var departmentDes = $.trim($("#departmentDes").val());
+
+        $.ajax({
+          url: '/departments/addDepartment',
+          type: 'POST',
+          data:{
+            "pid": pid,
+            "departmentName": departmentName,
+            "departmentDes":departmentDes
+          },
+          success:function(data){
+            if(data.code == 0){
+                layer.msg("成功")
+                var index=parent.layer.getFrameIndex(window.name); //获取当前窗口的name
+                parent.layer.close(index);//关闭窗口
+            }
+          }
+        })
+
+      return false;
+    });
+
+  });
+
+</script>
+</body>
+</html>

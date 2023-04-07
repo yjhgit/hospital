@@ -6,6 +6,7 @@ import com.yayangchun.traditionalchinesemedicinemuseum.enity.vo.LoginVo;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.vo.RegisteredVo;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.vo.UserListVo;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.vo.VerifyVo;
+import io.swagger.models.auth.In;
 
 import java.util.List;
 
@@ -23,11 +24,14 @@ public interface UserService extends IService<User> {
     public User login(String username, String password);
 
     public Long findByUsername(VerifyVo user);
+
     public User findByUsername(LoginVo user);
 
     public Long findByUsername(RegisteredVo user);
 
     public User findByUsernameToUser(User user);
+
+    public User findById(Integer id);
 
     User findByUsername(String username);
 
@@ -46,5 +50,7 @@ public interface UserService extends IService<User> {
     public Integer disable(Integer id, String status);
 
     public Integer UserListUpDataById(String account,Integer power,Integer id);
+
+    public List<User> findDoctor(String account,Integer power);
 }
 

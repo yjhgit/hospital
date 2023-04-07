@@ -205,9 +205,11 @@
                                 <span>预约时间：</span>
                                 <p th:text="${a.reservationTime}">
                                 </p>
+                                <span>预约时段：</span>
+                                <p th:text="${a.timePeriod}">
+                                </p>
                                 <span>预约手机：</span>
                                 <p th:text="${a.reservationPhone}">
-
                                 </p>
 								<span>症状：</span>
 								<p th:text="${a.symptom}">
@@ -218,6 +220,12 @@
                                 <span>预约年龄：</span>
                                 <p th:text="${a.reservationAge}">
                                 </p>
+                                <span>预约状态：</span>
+                                <p th:if="${a.state eq 0}">已取消</p>
+                                <p th:if="${a.state eq 1}">已预约</p>
+                                <p th:if="${a.state eq 2}">已完成</p>
+                                </br>
+                                <button th:if="${a.state eq 1}" type="button" class="btn btn-primary" th:onclick="|cancelBooking(${a.id})|">取消预约</button>
                             </div>
                         </div>
                     </div>
@@ -336,6 +344,22 @@
             window.location.href='/login/user';
         }
         xadmin.open('预约煎药', '/reception/toreYs', '580', '600', false);
+    }
+
+    function cancelBooking(id) {
+        $.ajax({
+            type:"get",
+            url:"/receptionApi/cancel?id="+id,
+            async:false,
+            processData:false,
+            contentType: "application/json",
+            success:function(res){
+                if(res != undefined && res != ""){
+                    layer.msg("取消成功")
+                }
+            }
+        });
+        location.reload();
     }
 </script>
 </html>

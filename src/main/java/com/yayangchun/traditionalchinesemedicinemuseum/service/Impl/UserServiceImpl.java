@@ -5,13 +5,16 @@ import cn.hutool.crypto.digest.DigestAlgorithm;
 import cn.hutool.crypto.digest.Digester;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yayangchun.traditionalchinesemedicinemuseum.dao.UserDao;
+import com.yayangchun.traditionalchinesemedicinemuseum.dao.UserInfoDao;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.User;
+import com.yayangchun.traditionalchinesemedicinemuseum.enity.UserInfo;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.enums.ErrorEnum;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.vo.LoginVo;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.vo.RegisteredVo;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.vo.UserListVo;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.vo.VerifyVo;
 import com.yayangchun.traditionalchinesemedicinemuseum.service.UserService;
+import com.yayangchun.traditionalchinesemedicinemuseum.unit.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -29,6 +32,9 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private UserInfoDao userInfoDao;
 
     @Override
     public List<User> login(User user) {
@@ -87,6 +93,10 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         return lambdaQuery().eq(User::getAccount,user.getAccount()).one();
     }
 
+    @Override
+    public User findById(Integer id) {
+        return lambdaQuery().eq(User::getId, id).one();
+    }
 
 
     @Override
@@ -148,6 +158,10 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         return userDao.UserListUpDataById(account,power,id);
     }
 
+    @Override
+    public List<User> findDoctor(String account, Integer power) {
+        return userDao.findDoctor(account,power);
+    }
 
 }
 

@@ -5,17 +5,22 @@ import com.yayangchun.traditionalchinesemedicinemuseum.enity.ReservationDot;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.ReservationYc;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.UserInfo;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.dto.userinfo.UserInfoEditDto;
+import com.yayangchun.traditionalchinesemedicinemuseum.enity.vo.LoginUserVo;
 import com.yayangchun.traditionalchinesemedicinemuseum.service.*;
 import com.yayangchun.traditionalchinesemedicinemuseum.unit.ResultUtil;
+import com.yayangchun.traditionalchinesemedicinemuseum.unit.SecurityUnit;
+import com.yayangchun.traditionalchinesemedicinemuseum.unit.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 作者：崖洋春
  * 时间：2023/3/17 15:13
  **/
-@RestController
+@Controller
 @RequestMapping("/receptionApi")
 public class ReceptionApiController {
 
@@ -35,6 +40,7 @@ public class ReceptionApiController {
     ReservationDotService reservationDotService;
 
     @RequestMapping("/upDataByUserInfo")
+    @ResponseBody
     public ResultUtil upDataByUserInfo(UserInfo editDto){
         Integer integer = userInfoService.upUserInfo(editDto);
         if (integer==0){
@@ -51,6 +57,7 @@ public class ReceptionApiController {
      * @return
      */
     @RequestMapping("/collectionByUser")
+    @ResponseBody
     public ResultUtil collectionByUser(String userid, String acid){
         Integer selecollection = articleService.selecollection(userid, acid);
         if (selecollection!=0){
@@ -69,6 +76,7 @@ public class ReceptionApiController {
      * @return
      */
     @RequestMapping("/addMsg")
+    @ResponseBody
     public ResultUtil addMsg(Propose propose){
         Integer integer = proposeService.addPropose(propose);
         if (integer==0){
@@ -84,6 +92,7 @@ public class ReceptionApiController {
      * @return
      */
     @RequestMapping("/addJy")
+    @ResponseBody
     public ResultUtil addJy(ReservationYc reservationYc){
         Integer integer = reservationYcService.addYc(reservationYc);
 
@@ -100,12 +109,22 @@ public class ReceptionApiController {
      * @return
      */
     @RequestMapping("/addYYs")
-    public ResultUtil addYYs(ReservationDot reservationDot){
-        Integer integer = reservationDotService.addReYs(reservationDot);
-        if (integer==0){
-            return ResultUtil.fail(500,"添加失败");
-        }
-        return ResultUtil.success("添加成功");
+    public String addYYs(ReservationDot reservationDot){
+        LoginUserVo vo = SecurityUnit.getLoginInfo();
+        reservationDot.setUserId(vo.getId());
+        reservationDot.setName(vo.getUserInfo().getUsername());
+        reservationDot.setReservationAge(StringUtils.isEmpty(vo.getUserInfo().getAge())?"":vo.getUserInfo().getAge().toString());
+        reservationDot.setReservationPhone(vo.getUserInfo().getPhone());
+        reservationDot.setState(1);
+        reservationDotService.addReYs(reservationDot);
+        return "redirect:/reception/toMyReserve?id="+vo.getId();
+    }
+
+    @RequestMapping("/cancel")
+    @ResponseBody
+    public ResultUtil cancel(Integer id){
+        reservationDotService.cancel(id);
+        return ResultUtil.success("取消成功");
     }
 
 

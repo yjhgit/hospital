@@ -30,6 +30,8 @@ public class UserInfo {
 
     private String phone;
 
+    private String introduce;
+
     private Integer userId;
 
 

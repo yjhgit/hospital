@@ -109,7 +109,7 @@
                                 <a href="#">专家团队</a>
                                 <ul class="dropdown-menu left-auto">
                                     <li><a href="/reception/Department">科室分类</a></li>
-                                    <li><a href="/reception/expert">专家名录</a></li>
+                                    <li class="active"><a href="/reception/expert">专家名录</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -121,14 +121,15 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="dropdown">
+                    <li class="dropdown active">
                         <a href="#">看诊服务</a>
                         <ul class="dropdown-menu">
                             <li><a href="/reception/chat">线上问诊</a></li>
-                            <li onclick="reys()"><a >预约面诊</a></li>
+                            <li><a href="/departments/findAll">预约面诊</a></li>
+                            <li><a href="/reception/bookingExpert">特邀专家预约</a></li>
                         </ul>
                     </li>
-                    <li class="yyc active"><a href="/reception/toForum">中医健康科普</a></li>
+                    <li><a href="/reception/toForum">中医健康科普</a></li>
                     <li><a href="/reception/about">关于我们</a></li>
 
                 </ul>
@@ -147,12 +148,12 @@
                         <div class="page-banner-content">
                             <div class="d-sm-flex justify-content-between align-items-center">
                                 <div class="title">
-                                    <h6 class="text-left text-capitalized">中医健康科普</h6>
-                                    <h2>健康科普知识</h2>
+                                    <h6 class="text-left text-capitalized">看诊服务</h6>
+                                    <h2>预约面诊</h2>
                                 </div>
                                 <div class="link text-sm-right text-left">
                                     <a href="/">主页 <i class="ti-angle-double-right"></i></a>
-                                    中医健康科普
+                                    看诊服务<i class="ti-angle-double-right"></i>预约面诊
                                 </div>
                             </div>
                         </div>
@@ -165,20 +166,31 @@
 
         <!-- BLOG PAGE SECTION -->
 
-        <section class="blog-page">
-            <div style="margin-left: 20%">
-                <label >请选择科室</label>
-                <select multiple class="form-control" style="width: 10%;height: 30%">
-                    <option>内科</option>
-                    <option>外科</option>
-                    <option>儿科</option>
-                    <option>4</option>
-                    <option>4</option>
-                    <option>4</option>
-                    <option>4</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
+        <section class="blog-page" style="height:300px">
+            <div style="margin-left: 20%;width:180px;margin-top: -3%">
+                <label >请选择科室：</label>
+                <div class="layui-panel">
+                    <ul class="layui-menu" id="docDemoMenu1" th:each="top : ${list}">
+                        <li th:lay-options="${top.id}" th:if="${top.getSonList() == null || top.getSonList().size() == 0}">
+                            <div class="layui-menu-body-title" th:text="${top.departmentName}"></div>
+                        </li>
+                        <li class="layui-menu-item-parent" th:lay-options="${top.id}" th:if="${top.getSonList() != null && top.getSonList().size() > 0}">
+                            <div class="layui-menu-body-title">
+                                <span th:text="${top.departmentName}"></span>
+                                <i class="layui-icon layui-icon-right"></i>
+                            </div>
+                            <div class="layui-panel layui-menu-body-panel">
+                                <ul th:each="dep : ${top.getSonList()}">
+                                    <li th:lay-options="${dep.id}">
+                                        <div class="layui-menu-body-title" th:text="${dep.departmentName}"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div style="margin-top: -7%;margin-left: 40%" id="doctorList">
             </div>
         </section>
 
@@ -206,9 +218,6 @@
        </footer>
 
         <!-- FOOTER END -->
-
-
-
 
         <script src="/docByq/js/jquery-3.3.1.min.js"></script>
         <script src="/docByq/js/bootstrap.min.js"></script>
@@ -297,5 +306,47 @@
             }
             xadmin.open('预约面诊', '/reception/toreYs', '580', '600', false);
         }
+
+        layui.use('dropdown', function(){
+            var dropdown = layui.dropdown;
+            //菜单点击事件，其中 docDemoMenu1 对应的是菜单结构上的 id 指
+            dropdown.on('click(docDemoMenu1)', function(options){
+                $.ajax({
+                    type:"get",
+                    url:"/docApi/queryUserByDepId?depId="+options,
+                    async:true,
+                    processData:false,
+                    contentType: "application/json",
+                    success:function(res){
+                        if(res != undefined && res != ""){
+                            $("#doctorList").html("");
+                            var htmlContent = "";
+                            for (var i = 0; i < res.length; i++) {
+                                htmlContent += "<div onclick='querySchedule("+res[i].userId+")' style=\"width: 15%;margin-left: 10px;float: left\">\n" +
+                                    "                    <div class=\"layui-card\">\n" +
+                                    "                        <div class=\"layui-card-header\">"+res[i].username+"</div>\n" +
+                                    "                        <div class=\"layui-card-body\">\n" +
+                                    "                            <img src=\"/docByq/img/doctor/4.jpg\" alt=\"\" style=\"width: 100%;height: 4%\">\n" +
+                                    "                        </div>\n" +
+                                    "                    </div>\n" +
+                                    "                </div>";
+                            }
+                            $("#doctorList").html(htmlContent);
+                        }
+                    }
+                });
+            });
+        });
+
+        // 查询医生排期
+        function querySchedule(userId) {
+            location.href = "/departments/querySchedule?userId="+userId;
+        }
+        userInfo(function (res){
+            if(res.data.id == undefined || res.data.id == ""){
+                location.href = "/login/user";
+            }
+        })
+
     </script>
 </html>

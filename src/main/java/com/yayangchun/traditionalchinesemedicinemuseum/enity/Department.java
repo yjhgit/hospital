@@ -1,11 +1,13 @@
 package com.yayangchun.traditionalchinesemedicinemuseum.enity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -41,6 +43,9 @@ public class Department implements Serializable {
      * 排序
      */
     private Integer departmentSort;
+
+    @TableField(exist = false)
+    private List<Department> sonList;
 
 
 }

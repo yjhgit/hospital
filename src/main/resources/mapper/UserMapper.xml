@@ -11,6 +11,20 @@
         WHERE user.id=user_info.user_id AND user.account like concat('%',#{account},'%')
     </select>
 
+    <select id="findDoctor" resultType="com.yayangchun.traditionalchinesemedicinemuseum.enity.User">
+        SELECT user.id,account,power,username,status,working_date workingDate,signal_source signalSource FROM user,user_info
+        WHERE user.id=user_info.user_id
+        <if test="account != null and account != ''">
+            AND username like concat('%',#{account},'%')
+        </if>
+        <if test="power != null and power != ''">
+            AND power  = #{power}
+        </if>
+        <if test="power == null or power == ''">
+            AND (power = 2 or power = 3 )
+        </if>
+    </select>
+
     <select id="findById" resultType="java.lang.Integer">
         SELECT count(*) FROM sw.sw_user WHERE id=#{id}
     </select>

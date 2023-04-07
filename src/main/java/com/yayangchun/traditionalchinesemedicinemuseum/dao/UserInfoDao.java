@@ -6,6 +6,8 @@ import com.yayangchun.traditionalchinesemedicinemuseum.enity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * 作者：崖洋春
  * 时间：2023/3/7 21:50
@@ -16,5 +18,8 @@ public interface UserInfoDao extends BaseMapper<UserInfo> {
     public Integer UserListUpDataById(@Param("id") Integer userid, @Param("username") String username);
 
 
+    List<UserInfo> queryUserInfoByDepId(@Param("depId") Integer depId);
+
+    List<UserInfo> findAllByRole(@Param("power") Integer power);
 }
 

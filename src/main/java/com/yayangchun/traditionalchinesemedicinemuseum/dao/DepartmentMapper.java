@@ -3,6 +3,10 @@ package com.yayangchun.traditionalchinesemedicinemuseum.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.Department;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 
 /**
@@ -14,6 +18,11 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface DepartmentMapper extends BaseMapper<Department> {
 
-
+    /**
+     * @description: 查询症状
+     * @date 2023/4/7
+     */
+    @Select("select name from symptom")
+    List<String> querySymptomAll();
 }
 

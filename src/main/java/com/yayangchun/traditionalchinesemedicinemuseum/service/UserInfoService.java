@@ -7,6 +7,7 @@ import com.yayangchun.traditionalchinesemedicinemuseum.enity.User;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.UserInfo;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.dto.userinfo.UserInfoEditDto;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.dto.userinfo.UserInfoSelectDto;
+import io.swagger.models.auth.In;
 
 import java.util.List;
 
@@ -31,6 +32,8 @@ public interface UserInfoService extends IService<UserInfo> {
 
     public Integer UpdateUserInfoById(UserInfo userInfo);
 
+    public List<UserInfo> queryUserInfoByDepId(Integer depId);
 
+    List<UserInfo> findAllByRole();
 }
 

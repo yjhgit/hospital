@@ -34,6 +34,10 @@ public class ReservationDot extends Model<ReservationDot> {
      */
     private String reservationTime;
     /**
+     * 预约时段
+     */
+    private String timePeriod;
+    /**
      * 预约人年龄
      */
     private String reservationAge;
@@ -46,7 +50,13 @@ public class ReservationDot extends Model<ReservationDot> {
      */
     private String name;
 
-    private String userId;
+    private Integer userId;
+    /**
+     * 预约状态 0已取消 1已预约 2已完成
+     */
+    private Integer state;
+
+    private Integer doctorId;
 
 }
 
