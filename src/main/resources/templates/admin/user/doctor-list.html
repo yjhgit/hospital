@@ -193,8 +193,10 @@
                 layui.form.render();
                 if(data1.power != 2){
                     $("#depDiv").hide()
+                    $("#department").val("");
                 }else {
                     $("#depDiv").show()
+                    $("#department").val(data1.departmentId);
                 }
                 $('#myModal').modal('show');
             }else if (obj.event === 'query') {

@@ -96,19 +96,21 @@ public class DepartmentController extends BaseController {
     @RequestMapping("/querySymptom")
     @ApiOperation("查询症状")
     @ResponseBody
-    public List<String> querySymptom(){
-        return departmentService.qeurySymptomAll();
+    public List<String> querySymptom(Integer departmentId){
+
+        return departmentService.qeurySymptomAll(departmentId);
     }
 
     @RequestMapping("/querySchedule")
     @ApiOperation("查询排期数据-跳转排期页面")
-    public String querySchedule(Integer userId,Model model){
+    public String querySchedule(Integer userId,Integer departmentId,Model model){
         LoginUserVo vo = SecurityUnit.getLoginInfo();
         String name = vo.getUserInfo().getUsername();
         UserInfoSelectDto userInfoSelectDto = new UserInfoSelectDto();
         userInfoSelectDto.setUserId(userId);
         UserInfo byUserid = userInfoService.findByUserid(userInfoSelectDto);
         model.addAttribute("userId",userId);
+        model.addAttribute("departmentId",departmentId);
         model.addAttribute("doctorName",byUserid.getUsername());
         model.addAttribute("doctorId",byUserid.getUserId());
         model.addAttribute("username",name);

@@ -12,7 +12,7 @@
     </select>
 
     <select id="findDoctor" resultType="com.yayangchun.traditionalchinesemedicinemuseum.enity.User">
-        SELECT user.id,account,power,username,status,working_date workingDate,signal_source signalSource FROM user,user_info
+        SELECT user.id,account,power,username,status,working_date workingDate,signal_source signalSource,department_id departmentId FROM user,user_info
         WHERE user.id=user_info.user_id
         <if test="account != null and account != ''">
             AND username like concat('%',#{account},'%')

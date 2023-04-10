@@ -75,8 +75,8 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
     }
 
     @Override
-    public List<String> qeurySymptomAll() {
-        return departmentMapper.querySymptomAll();
+    public List<String> qeurySymptomAll(Integer departmentId) {
+        return departmentMapper.querySymptomAll(departmentId);
     }
 
     @Override

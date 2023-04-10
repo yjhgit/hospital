@@ -191,7 +191,9 @@
                 <div id="timePeriod"></div></br>
                 <select id="symptom" name="symptom" class="form-control selectpicker" style="width:30%">
                     <option value="">请选择症状</option>
-                </select></br></br></br></br>
+                </select>
+                <input type="text" class="form-control" style="width:30%" id="expertSymptom" placeholder="请输入症状">
+                </br></br></br></br>
                 <a href="#" class="btn btn-default btn-lg" role="button" onclick="toConfirm()">预约</a>
             </div>
         </section>
@@ -417,6 +419,7 @@
         }
         document.addEventListener('DOMContentLoaded', function() {
             querySymptom();
+            checkSymptom();
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 header: {
@@ -467,12 +470,18 @@
                 layer.msg("请选择预约时间及时段")
                 return
             }
-            if(!$("#symptom").val()){
-                layer.msg("请选择症状")
+            var symptomVal = "";
+            if([[${departmentId}]] != 0){
+                symptomVal = $("#symptom").val()
+            }else {
+                symptomVal = $("#expertSymptom").val()
+            }
+            if(!symptomVal){
+                layer.msg("症状不能为空")
                 return
             }
-            $("#symptomVal").attr("placeholder",$("#symptom").val());
-            $("#symptomHid").val($("#symptom").val());
+            $("#symptomVal").attr("placeholder",symptomVal);
+            $("#symptomHid").val(symptomVal);
             $("#timePeriodVal").attr("placeholder",$("input[name='timePeriod']:checked").val());
             $("#bookingTimePeriod").val($("input[name='timePeriod']:checked").val());
             $('#myModal').modal('show')
@@ -485,7 +494,7 @@
         function querySymptom() {
             $.ajax({
                 type:"get",
-                url:"/departments/querySymptom",
+                url:"/departments/querySymptom?departmentId="+[[${departmentId}]],
                 async:false,
                 processData:false,
                 contentType: "application/json",
@@ -500,6 +509,14 @@
                     }
                 }
             });
+        }
+
+        function checkSymptom() {
+            if([[${departmentId}]] != 0){
+                $("#expertSymptom").hide()
+            }else {
+                $("#symptom").hide()
+            }
         }
 
     </script>

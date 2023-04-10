@@ -3,6 +3,7 @@ package com.yayangchun.traditionalchinesemedicinemuseum.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.yayangchun.traditionalchinesemedicinemuseum.enity.Department;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +23,7 @@ public interface DepartmentMapper extends BaseMapper<Department> {
      * @description: 查询症状
      * @date 2023/4/7
      */
-    @Select("select name from symptom")
-    List<String> querySymptomAll();
+    @Select("select name from symptom where department_id = #{departmentId}")
+    List<String> querySymptomAll(@Param("departmentId") Integer departmentId);
 }
 

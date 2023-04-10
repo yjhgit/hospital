@@ -190,6 +190,7 @@
                     </ul>
                 </div>
             </div>
+            <input type="hidden" id="departmentId">
             <div style="margin-top: -7%;margin-left: 40%" id="doctorList">
             </div>
         </section>
@@ -324,6 +325,7 @@
                     contentType: "application/json",
                     success:function(res){
                         if(res != undefined && res != ""){
+                            $("#departmentId").val(options);
                             $("#doctorList").html("");
                             var htmlContent = "";
                             for (var i = 0; i < res.length; i++) {
@@ -345,7 +347,7 @@
 
         // 查询医生排期
         function querySchedule(userId) {
-            location.href = "/departments/querySchedule?userId="+userId;
+            location.href = "/departments/querySchedule?userId="+userId+"&departmentId="+$("#departmentId").val();
         }
         userInfo(function (res){
             if(res.data.id == undefined || res.data.id == ""){
